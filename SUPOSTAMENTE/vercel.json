@@ -1,0 +1,97 @@
+{
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/gestao",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/apelacoes",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/dados",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/developers-portal",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/manutencao",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/apelações",
+      "destination": "/apelacoes",
+      "permanent": false
+    },
+    {
+      "source": "/apela%C3%A7%C3%B5es",
+      "destination": "/apelacoes",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/admin-appeals",
+      "destination": "/api/admin?r=appeals"
+    },
+    {
+      "source": "/api/admin-launch",
+      "destination": "/api/admin?r=launch"
+    },
+    {
+      "source": "/api/admin-maintenance",
+      "destination": "/api/admin?r=maintenance"
+    },
+    {
+      "source": "/api/admin-preview",
+      "destination": "/api/admin?r=preview"
+    },
+    {
+      "source": "/api/admin-users",
+      "destination": "/api/admin?r=users"
+    },
+    {
+      "source": "/api/admin-waitlist",
+      "destination": "/api/admin?r=waitlist"
+    }
+  ]
+}

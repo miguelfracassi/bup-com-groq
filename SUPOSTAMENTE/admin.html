@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Administração · Ticord</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"><link rel="stylesheet" href="/site.css"><style>
+body{padding-top:0}.ad{max-width:960px;margin:0 auto;padding:28px 20px 60px}
+.ad h1{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 6px}.ad .lead{margin:0 0 22px;font-size:1rem}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}.bar input{flex:1;min-width:180px;padding:11px 18px}
+.bar .btn{padding:10px 18px;font-size:.9rem}.cnt{font-weight:700;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 16px}
+.tw{overflow-x:auto;background:#fff;border:2px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink)}
+table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:12px 16px;border-bottom:1px solid #e4e4ea;white-space:nowrap}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#555}tr:last-child td{border-bottom:0}td a{font-weight:700;color:#1b7f3b}
+.x{all:unset;cursor:pointer;color:#c62828;font-weight:700;padding:2px 8px;border-radius:8px}.x:hover{background:#fde8e8}.x:focus-visible{outline:3px solid var(--b)}
+.empty{text-align:center;padding:30px;color:#666}.login{max-width:420px;margin:12vh auto 0}.login form{display:grid;gap:12px}
+.ad h2{font-size:1.4rem;margin:34px 0 6px}.ad .lc h2{margin:0 0 10px}.lc{padding:24px 26px}
+.bd{display:inline-block;font-weight:700;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;margin:0 0 14px;background:#ffe6c4}.bd.on{background:#c8f2cf}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 12px;max-width:460px}.cd div{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:10px 4px;text-align:center}
+.cd b{display:block;font-family:Silkscreen,monospace;font-size:1.7rem;line-height:1.1}.cd span{font-size:.72rem;color:#555;font-weight:700;text-transform:uppercase}
+.lw{font-weight:700;margin:0 0 18px}.lw small{display:block;font-weight:400;text-transform:none;color:#555;margin-top:4px}
+.card .lf2{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}.lf2 label{display:grid;gap:4px;font-weight:700;font-size:.85rem;flex:1;min-width:150px}
+.lbt{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.lbt .btn{padding:10px 18px;font-size:.9rem}
+</style></head><body><main class="ad">
+<section class="card login" id="lg"><h1>Administração · Ticord</h1><p class="lead">Inscrições da página /join. Digite a chave de acesso.</p>
+<form id="lf"><input id="key" type="password" autocomplete="current-password" placeholder="Chave de acesso" required><p class="err" id="le" role="alert"></p><button class="btn" type="submit">Entrar</button></form></section>
+<section id="pn" hidden><h1>Administração</h1><p class="lead">Lançamento do site e inscrições da página /join. <a href="/gestao"><b>Gestão de contas →</b></a></p>
+<section class="card lc" aria-labelledby="lt"><h2 id="lt">Lançamento do site</h2>
+<span class="bd" id="lb" role="status">Carregando...</span>
+<div class="cd" id="lcd" hidden aria-label="Tempo restante para o lançamento"><div><b id="cd-d">00</b><span>dias</span></div><div><b id="cd-h">00</b><span>horas</span></div><div><b id="cd-m">00</b><span>min</span></div><div><b id="cd-s">00</b><span>seg</span></div></div>
+<p class="lw" id="lw"></p>
+<form class="lf2" id="lsf"><label>Data<input id="ld" type="date" required></label><label>Hora<input id="lh" type="time" required></label><button class="btn" type="submit">Agendar lançamento</button></form>
+<div class="lbt"><button class="btn" id="lview" type="button">Ver o site (sem a /join)</button><button class="btn alt" id="lnow" type="button">Liberar agora</button><button class="btn alt" id="lend" type="button">Sair da prévia</button><button class="btn alt" id="llock" type="button">Travar e apagar data</button></div>
+<p class="err" id="lm" role="alert"></p>
+<p class="hint">Enquanto o site estiver travado, quem abrir qualquer página vai para /join. Quando a contagem chegar a zero o site abre sozinho, sem novo deploy. Horário do seu navegador. O botão "Ver o site" libera só para você, neste navegador, por 2 horas (ou até você travar o site ou clicar em "Sair da prévia").</p></section>
+<h2>Inscrições do /join</h2><p class="lead">Quem pediu aviso para a inauguração do Bup.</p>
+<div class="bar"><input id="q" type="search" placeholder="Buscar por nome ou telefone"><span class="cnt" id="ct">0</span><button class="btn alt" id="rf" type="button">Atualizar</button><button class="btn" id="csv" type="button">Baixar CSV</button><button class="btn alt" id="out" type="button">Sair</button></div>
+<div class="tw"><table><thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>Quando</th><th></th></tr></thead><tbody id="tb"></tbody></table></div></section>
+</main><script>
+(()=>{
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let key='',rows=[];try{key=sessionStorage.getItem('adm')||''}catch(e){}
+const fmtP=p=>{const d=String(p).replace(/^55/,'');return d.length===11?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`};
+const fmtD=t=>new Date(t).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+const api=(m,q='')=>fetch('/api/admin-waitlist'+q,{method:m,headers:{'x-admin-key':key}}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Erro'),{st:r.status});return j});
+const draw=()=>{const q=$('#q').value.trim().toLowerCase(),qd=q.replace(/\D/g,''),l=rows.filter(r=>!q||r.name.toLowerCase().includes(q)||(qd&&r.phone.includes(qd)));
+ $('#ct').textContent=l.length+(l.length===rows.length?' inscritos':' de '+rows.length);
+ $('#tb').innerHTML=l.length?l.map((r,i)=>`<tr><td>${rows.length-rows.indexOf(r)}</td><td>${esc(r.name)}</td><td><a href="https://wa.me/${esc(r.phone)}" target="_blank" rel="noopener">${esc(fmtP(r.phone))}</a></td><td>${esc(fmtD(r.created_at))}</td><td><button class="x" data-id="${r.id}" type="button" aria-label="Remover ${esc(r.name)}">Remover</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">Nenhuma inscrição ainda.</td></tr>'};
+const pad=n=>String(n).padStart(2,'0'),fmtL=t=>new Date(t).toLocaleString('pt-BR',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+let ls=null,lo=0,chk=0;
+const lapi=b=>fetch('/api/admin-launch',{method:b?'POST':'GET',headers:Object.assign({'x-admin-key':key},b?{'Content-Type':'application/json'}:{}),body:b?JSON.stringify(b):undefined}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Erro'),{st:r.status});return j});
+const setL=s=>{ls=s;lo=new Date(s.now)-Date.now();paintL()};
+const paintL=()=>{if(!ls)return;const b=$('#lb'),w=$('#lw');b.classList.toggle('on',ls.open);
+ if(ls.open){b.textContent='Site liberado';w.innerHTML=ls.open_now?'Liberado manualmente.':'Abriu sozinho em '+esc(fmtL(ls.launch_at))+'.'}
+ else if(ls.launch_at){b.textContent='Site travado · abre sozinho';w.innerHTML='Abre em '+esc(fmtL(ls.launch_at));const d=new Date(ls.launch_at);$('#ld').value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());$('#lh').value=pad(d.getHours())+':'+pad(d.getMinutes())}
+ else{b.textContent='Site travado · sem data';w.innerHTML='Escolha o dia e a hora do lançamento abaixo.<small>Sem data, o site fica travado até você liberar.</small>'}
+ tick()};
+const tick=()=>{const c=$('#lcd');if(!ls||ls.open||!ls.launch_at){c.hidden=true;return}c.hidden=false;
+ const ms=new Date(ls.launch_at)-(Date.now()+lo),s=Math.max(0,Math.floor(ms/1000));
+ $('#cd-d').textContent=pad(Math.floor(s/86400));$('#cd-h').textContent=pad(Math.floor(s%86400/3600));$('#cd-m').textContent=pad(Math.floor(s%3600/60));$('#cd-s').textContent=pad(s%60);
+ if(ms<=0&&!chk){chk=1;setTimeout(()=>{chk=0;lapi().then(setL).catch(()=>{})},1500)}};
+setInterval(tick,1000);
+const lact=async b=>{$('#lm').textContent='';try{setL(await lapi(b))}catch(x){x.st===401?bye():$('#lm').textContent=x.message}};
+$('#lsf').onsubmit=e=>{e.preventDefault();const at=new Date($('#ld').value+'T'+$('#lh').value);if(isNaN(at))return $('#lm').textContent='Escolha uma data e hora válidas.';
+ if(at<=new Date(Date.now()+lo))return $('#lm').textContent='Escolha uma data e hora no futuro (ou use "Liberar agora").';lact({action:'schedule',at:at.toISOString()})};
+$('#lview').onclick=async()=>{$('#lm').textContent='';const w=window.open('about:blank','_blank');try{const r=await fetch('/api/admin-preview',{method:'POST',headers:{'x-admin-key':key}});if(!r.ok){const j=await r.json().catch(()=>({}));throw Object.assign(new Error(j.error||'Erro'),{st:r.status})}w?w.location.href='/':location.href='/'}catch(x){if(w)w.close();x.st===401?bye():$('#lm').textContent=x.message}};
+$('#lend').onclick=async()=>{$('#lm').textContent='';try{const r=await fetch('/api/admin-preview',{method:'DELETE',headers:{'x-admin-key':key}});if(!r.ok)throw new Error('Erro');$('#lm').textContent='Prévia encerrada neste navegador. Agora você vê o site como o público.'}catch(x){$('#lm').textContent=x.message}};
+$('#lnow').onclick=()=>{if(confirm('Liberar o site agora para todo mundo?'))lact({action:'open_now'})};
+$('#llock').onclick=()=>{if(confirm('Travar o site de novo? Quem entrar vai para /join e a data agendada será apagada.')){$('#ld').value='';$('#lh').value='';lact({action:'lock'})}};
+const load=async()=>{const [j,l]=await Promise.all([api('GET'),lapi().catch(x=>{if(x.st===401)throw x;$('#lm').textContent='Não consegui ler o estado do lançamento.';return null})]);rows=j.rows;$('#lg').hidden=true;$('#pn').hidden=false;draw();if(l)setL(l)};
+const bye=()=>{key='';try{sessionStorage.removeItem('adm')}catch(e){}$('#pn').hidden=true;$('#lg').hidden=false;$('#key').value=''};
+$('#lf').onsubmit=async e=>{e.preventDefault();$('#le').textContent='';key=$('#key').value;try{await load();try{sessionStorage.setItem('adm',key)}catch(x){}}catch(x){$('#le').textContent=x.message}};
+$('#q').oninput=draw;$('#rf').onclick=()=>load().catch(x=>x.st===401?bye():alert(x.message));$('#out').onclick=bye;
+$('#tb').onclick=async e=>{const b=e.target.closest('.x');if(!b||!confirm('Remover esta inscrição?'))return;try{await api('DELETE','?id='+b.dataset.id);rows=rows.filter(r=>r.id!=b.dataset.id);draw()}catch(x){alert(x.message)}};
+$('#csv').onclick=()=>{const q=s=>'"'+String(s).replace(/"/g,'""')+'"',t='\ufeffnome,telefone,data\n'+rows.map(r=>[q(r.name),q('+'+r.phone),q(fmtD(r.created_at))].join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv;charset=utf-8'}));a.download='inscricoes-join.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+if(key)load().catch(bye);
+})();
+</script></body></html>

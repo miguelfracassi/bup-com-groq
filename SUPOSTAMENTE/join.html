@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bup · Em breve</title><meta name="description" content="Conversa com IA ficou chata. Com o Bup, isso vira ao contrário. Deixe seu nome e telefone e a gente avisa quando inaugurar."><meta property="og:title" content="Bup · Em breve"><meta property="og:description" content="Conversa com IA ficou chata. Com o Bup, isso vira ao contrário."><meta property="og:image" content="/assets/og.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"><link rel="stylesheet" href="/site.css"><style>
+@property --c1{syntax:'<color>';inherits:true;initial-value:#ffe066}
+@property --c2{syntax:'<color>';inherits:true;initial-value:#ffa62b}
+.jn{max-width:760px;margin:0 auto;padding:14px 20px 40px;text-align:center}
+.stage{position:relative;overflow:hidden;display:grid;place-items:center;height:300px;border-radius:40px;background:#ffe6c4;border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);transition:background .6s}
+.stage[data-m=bravo]{background:#ffcfc7}.stage[data-m=dormindo]{background:#c9d6f5}.stage[data-m=triste]{background:#dfe5f1}.stage[data-m=amando]{background:#ffd3e8}
+.stage[data-m=surpreso]{background:#dff3cf}.stage[data-m=pensando]{background:#e6dcff}.stage[data-m=rindo]{background:#fff0a8}.stage[data-m=six]{background:#dff0ff}
+[data-m=bravo]{--c1:#ff9a7a;--c2:#e5342b}[data-m=dormindo]{--c1:#ffeab0;--c2:#e8b65c}[data-m=triste]{--c1:#d6e6ff;--c2:#8aa8e8}[data-m=amando]{--c1:#ffd3e8;--c2:#ff7ab8}
+[data-m=surpreso]{--c1:#e6ffd0;--c2:#8fd16a}[data-m=pensando]{--c1:#eadfff;--c2:#a98cf0}[data-m=rindo]{--c1:#fff3a0;--c2:#ffc41f}
+.big{width:210px;filter:drop-shadow(0 22px 30px #0003);transition:--c1 .5s,--c2 .5s}.big svg,.tl svg{width:100%;display:block;overflow:visible}
+.big svg{animation:b-bob 3s ease-in-out infinite}
+.stage[data-m=bravo] .big svg{animation:b-shake .35s linear infinite}.stage[data-m=dormindo] .big svg{animation:b-breathe 4s ease-in-out infinite}
+.stage[data-m=triste] .big svg{animation:b-sink 3s ease-in-out infinite}.stage[data-m=amando] .big svg{animation:b-beat .9s ease-in-out infinite}
+.stage[data-m=surpreso] .big svg{animation:b-pop .4s ease-out 1}.stage[data-m=rindo] .big svg{animation:b-jump .5s ease-in-out infinite}
+.stage[data-m=pensando] .big svg,.stage[data-m=six] .big svg{animation:b-tilt 2s ease-in-out infinite}
+.x{opacity:0;transition:opacity .2s}.x.on{opacity:1}
+.z{opacity:0;animation:b-z 2.4s ease-in infinite}.z2{animation-delay:1.2s}.tear{animation:b-tear 2s ease-in infinite}
+.hands{opacity:0;transition:opacity .2s}[data-m=six] .hands{opacity:1}.hl,.hr{transform-box:fill-box;transform-origin:center}
+.stage[data-m=six] .hl{animation:s7 .45s ease-in-out infinite alternate}.stage[data-m=six] .hr{animation:s7 .45s ease-in-out infinite alternate-reverse}
+@keyframes s7{from{transform:translateY(-14px)}to{transform:translateY(14px)}}
+@keyframes b-shake{25%{transform:translateX(-5px) rotate(-2deg)}75%{transform:translateX(5px) rotate(2deg)}}
+@keyframes b-breathe{50%{transform:scale(1.04)}}@keyframes b-sink{50%{transform:translateY(5px)}}@keyframes b-beat{40%{transform:scale(1.07)}}
+@keyframes b-pop{0%{transform:scale(.85)}60%{transform:scale(1.1)}}@keyframes b-jump{50%{transform:translateY(-16px) rotate(4deg)}}@keyframes b-tilt{50%{transform:rotate(4deg)}}
+@keyframes b-z{0%{opacity:0;transform:translate(0,8px)}30%{opacity:1}100%{opacity:0;transform:translate(6px,-14px)}}
+@keyframes b-tear{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}100%{opacity:0;transform:translateY(18px)}}
+.pill{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);margin:0;padding:7px 18px;border-radius:999px;background:#fff;box-shadow:0 6px 20px #0002;font-weight:700;white-space:nowrap}
+.strip{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin:26px 0 8px;padding:0;list-style:none}
+.tl{all:unset;box-sizing:border-box;display:grid;gap:4px;justify-items:center;width:100%;padding:8px 2px;border-radius:18px;cursor:pointer;border:2px solid transparent;font-size:.72rem;font-weight:700;transition:transform .2s,background .2s}
+.tl>span:first-child{width:44px;display:block}.tl:hover{transform:translateY(-3px)}.tl[aria-pressed=true]{background:#fff;border-color:var(--ink)}.tl:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+h1{font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.1;margin:30px 0 10px}
+.sub{font-size:clamp(1.15rem,3.4vw,1.5rem);line-height:1.35;margin:0 0 30px;font-weight:700}.sub mark{background:#ffd23f;border-radius:8px;padding:0 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.jc{max-width:460px;margin:0 auto;text-align:left}.jc h2{font-size:1.4rem;margin:0 0 16px;text-align:center}
+.jc .btn{font-size:1.05rem;padding:14px 24px;margin-top:4px}.jc .btn[disabled]{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.done{text-align:center;font-size:1.15rem;line-height:1.5;font-weight:700;margin:0;padding:10px 0}
+.cdw{margin:0 auto 30px;max-width:460px}.cdw>p{margin:0 0 10px;font-weight:700}
+.cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.cdg div{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:12px 4px;box-shadow:4px 4px 0 var(--ink)}
+.cdg b{display:block;font-family:Silkscreen,monospace;font-size:clamp(1.5rem,6vw,2.2rem);line-height:1.1}.cdg span{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#555}
+.cdw .when{margin:14px 0 0;font-weight:400;color:#444;font-size:.95rem}
+@media(max-width:700px){.strip{grid-template-columns:repeat(3,1fr)}.tl>span:first-child{width:54px}.stage{height:250px}.big{width:170px}}
+@media(prefers-reduced-motion:reduce){.big svg,.hl,.hr,.z,.tear{animation:none!important}}
+</style></head><body><div id="nav"></div><main class="jn">
+<section class="stage" id="stage" data-m="feliz" aria-label="O Bup mudando de expressão"><div class="big" id="big"></div><p class="pill" id="pill" aria-live="polite">Feliz</p></section>
+<ul class="strip" id="strip" aria-label="Todas as expressões do Bup"></ul>
+<h1>Conversa com IA, ficou chata.</h1>
+<p class="sub">Mas com o Bup, <mark>isso vira ao contrário.</mark></p>
+<section class="cdw" id="cdw" hidden aria-label="Contagem regressiva para a inauguração"><p id="cdl">Inauguração em</p><div class="cdg"><div><b id="cdd">00</b><span>dias</span></div><div><b id="cdh">00</b><span>horas</span></div><div><b id="cdm">00</b><span>min</span></div><div><b id="cds">00</b><span>seg</span></div></div><p class="when" id="cdw2"></p></section>
+<section class="card jc" aria-labelledby="jt"><h2 id="jt">Me avise quando inaugurar!</h2>
+<form id="f" novalidate><label>Primeiro nome<input id="nm" name="name" type="text" autocomplete="given-name" maxlength="30" required></label>
+<label>Telefone<input id="ph" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 99999-9999" required></label>
+<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+<p class="err" id="er" role="alert"></p><button class="btn" id="go" type="submit">Me avise!</button></form>
+<p class="done" id="ok" hidden></p></section>
+</main><div id="foot"></div>
+<script>
+(()=>{
+const T='fill="#3a2a1a" stroke="none"';
+const G={
+feliz:()=>`<path d="M34 54q7-10 15 0M71 54q7-10 15 0M38 72q22 20 44 0"/>`,
+amando:k=>`<use href="#${k}h" x="31" y="44"/><use href="#${k}h" x="69" y="44"/><path d="M44 76q16 16 32 0"/><g fill="#ff7ab8" stroke="none" opacity=".6"><ellipse cx="26" cy="74" rx="7" ry="4"/><ellipse cx="94" cy="74" rx="7" ry="4"/></g>`,
+rindo:()=>`<path d="M34 48l14 6-14 6M86 48l-14 6 14 6"/><path d="M36 70q24 2 48 0q-3 26-24 26t-24-26z" fill="#3a2a1a"/><path d="M48 90q12-9 24 0q-12 7-24 0z" fill="#ff7a8a" stroke="none"/>`,
+surpreso:()=>`<circle cx="42" cy="56" r="8" fill="#fff" stroke-width="3"/><circle cx="78" cy="56" r="8" fill="#fff" stroke-width="3"/><circle cx="42" cy="56" r="3.5" ${T}/><circle cx="78" cy="56" r="3.5" ${T}/><path d="M32 38q10-6 20 0M68 38q10-6 20 0"/><ellipse cx="60" cy="88" rx="6" ry="8" fill="#3a2a1a"/>`,
+pensando:()=>`<path d="M31 46h20M69 38q10-6 20 0M46 86q10-5 26-2"/><circle cx="44" cy="54" r="4.5" ${T}/><circle cx="80" cy="50" r="4.5" ${T}/><g fill="#fff" stroke-width="2.5"><circle cx="98" cy="20" r="3"/><circle cx="107" cy="9" r="4.5"/><circle cx="118" cy="-3" r="6.5"/></g>`,
+triste:()=>`<path d="M31 52l22-8M89 52l-22-8M44 88q16-13 32 0"/><circle cx="42" cy="62" r="4.5" ${T}/><circle cx="78" cy="62" r="4.5" ${T}/><path class="tear" d="M84 68q6 9 0 13q-6-4 0-13z" fill="#7fb4ff" stroke="none"/>`,
+bravo:()=>`<path d="M30 42l22 9M90 42l-22 9M42 90q18-16 36 0"/><circle cx="42" cy="62" r="4.5" ${T}/><circle cx="78" cy="62" r="4.5" ${T}/><path d="M92 22q6 0 6-6M104 22q-6 0-6-6M92 10q6 0 6 6M104 10q-6 0-6 6" stroke="#d32f2f" stroke-width="3"/>`,
+dormindo:()=>`<path d="M32 58q8 7 16 0M72 58q8 7 16 0M52 80q8 5 16 0"/><path class="z" d="M94 30h9l-9 11h9" stroke-width="3"/><path class="z z2" d="M104 14h7l-7 9h7" stroke-width="2.5"/>`,
+six:()=>`<path d="M34 54q7-10 15 0M71 54q7-10 15 0M36 70q24 26 48 0"/><g fill="#ff7ab8" stroke="none" opacity=".6"><ellipse cx="26" cy="74" rx="7" ry="4"/><ellipse cx="94" cy="74" rx="7" ry="4"/></g>`};
+const M=[['feliz','Feliz'],['amando','Apaixonado'],['rindo','Rindo'],['surpreso','Surpreso'],['pensando','Pensando'],['triste','Triste'],['bravo','Bravo'],['dormindo','Dormindo'],['six','Six seven']];
+let n=0;
+const face=(on,all)=>{const k='f'+n++;return `<svg viewBox="-10 -10 140 140" aria-hidden="true"><defs><radialGradient id="${k}" cx=".35" cy=".3"><stop offset="0" style="stop-color:var(--c1)"/><stop offset="1" style="stop-color:var(--c2)"/></radialGradient><path id="${k}h" d="M10 18C2 12 0 8 0 5a5 5 0 0 1 10-2 5 5 0 0 1 10 2c0 3-2 7-10 13z" fill="#e5195f"/></defs><circle cx="60" cy="60" r="58" fill="#fff"/><circle cx="60" cy="60" r="52" fill="url(#${k})"/><g fill="none" stroke="#3a2a1a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">${M.filter(([m])=>all||m===on).map(([m])=>`<g class="x ${m}${m===on?' on':''}">${G[m](k)}</g>`).join('')}</g><g class="hands"><g class="hl"><circle cx="-4" cy="72" r="13" fill="url(#${k})" stroke="#fff" stroke-width="4"/></g><g class="hr"><circle cx="124" cy="72" r="13" fill="url(#${k})" stroke="#fff" stroke-width="4"/></g></g></svg>`};
+const $=s=>document.querySelector(s),st=$('#stage'),big=$('#big'),pill=$('#pill'),strip=$('#strip');
+big.innerHTML=face('feliz',true);
+const xs=[...big.querySelectorAll('.x')];
+strip.innerHTML=M.map(([m,t])=>`<li><button class="tl" type="button" data-m="${m}" aria-pressed="${m==='feliz'}"><span>${face(m)}</span>${t}</button></li>`).join('');
+const tls=[...strip.querySelectorAll('.tl')];
+let cur=0,timer=null,done=false;
+const show=i=>{cur=i;const [m,t]=M[i];st.dataset.m=m;big.dataset.m=m;pill.textContent=t;xs.forEach(g=>g.classList.toggle('on',g.classList.contains(m)));tls.forEach((b,j)=>b.setAttribute('aria-pressed',j===i))};
+const run=()=>{clearInterval(timer);if(!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(()=>{if(!done)show((cur+1)%M.length)},1700)};
+tls.forEach((b,i)=>b.onclick=()=>{show(i);run()});
+show(0);run();
+const ph=$('#ph');
+ph.addEventListener('input',()=>{const d=ph.value.replace(/\D/g,'').slice(0,11);let s=d;if(d.length>2)s='('+d.slice(0,2)+') '+(d.length>10?d.slice(2,7)+'-'+d.slice(7):d.slice(2,6)+(d.length>6?'-'+d.slice(6):''));ph.value=s});
+const f=$('#f'),er=$('#er'),go=$('#go');
+f.addEventListener('submit',async e=>{e.preventDefault();er.textContent='';
+ const name=f.name.value.trim().split(/\s+/)[0],d=ph.value.replace(/\D/g,'');
+ if(name.length<2){er.textContent='Digite seu primeiro nome.';return f.name.focus()}
+ if(!(d.length===10||(d.length===11&&d[2]==='9'))){er.textContent='Telefone inválido. Use DDD + número.';return ph.focus()}
+ go.disabled=true;go.textContent='Enviando...';
+ try{const r=await fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone:ph.value,site:f.site.value})});
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Não deu pra enviar agora. Tente de novo.');
+  f.hidden=true;const ok=$('#ok');ok.textContent=`Anotado, ${j.name||name}! Te aviso assim que o Bup inaugurar.`;ok.hidden=false;done=true;show(1);
+ }catch(x){er.textContent=x.message;go.disabled=false;go.textContent='Me avise!'}});
+const cw=$('#cdw'),pd=n=>String(n).padStart(2,'0');let LT=0,off=0,tm=null;
+const opn=()=>{let t=0;try{t=+sessionStorage.getItem('bup_go')||0}catch(e){}if(Date.now()-t<8000)return setTimeout(opn,4000);try{sessionStorage.setItem('bup_go',Date.now())}catch(e){}location.replace('/')};
+const poll=()=>fetch('/api/launch',{cache:'no-store'}).then(r=>r.json()).then(j=>j.open?opn():setTimeout(poll,3000)).catch(()=>setTimeout(poll,5000));
+const tick=()=>{const ms=LT-(Date.now()+off),s=Math.max(0,Math.floor(ms/1000));
+ $('#cdd').textContent=pd(Math.floor(s/86400));$('#cdh').textContent=pd(Math.floor(s%86400/3600));$('#cdm').textContent=pd(Math.floor(s%3600/60));$('#cds').textContent=pd(s%60);
+ if(ms<=0){clearInterval(tm);$('#cdl').textContent='Abrindo o Bup...';poll()}};
+fetch('/api/launch',{cache:'no-store'}).then(r=>r.json()).then(j=>{if(j.open)return opn();if(!j.launch_at)return;
+ LT=new Date(j.launch_at).getTime();off=new Date(j.now)-Date.now();
+ $('#cdw2').textContent=new Date(LT).toLocaleString('pt-BR',{weekday:'long',day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'});
+ cw.hidden=false;tick();tm=setInterval(tick,1000)}).catch(()=>{});
+})();
+</script><script src="/site.js"></script></body></html>
