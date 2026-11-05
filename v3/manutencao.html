@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Bup · Em manutenção</title><meta name="description" content="O Bup está em manutenção. A infraestrutura da Ticord está sendo restaurada."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"><link rel="stylesheet" href="/site.css?v=3"><style>
+body{overflow-x:hidden;padding-top:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* ---------- esteiras de ferramentas e carinhas do Bup ---------- */
+.tape{height:14px;background:repeating-linear-gradient(-45deg,#ffd23f 0 14px,#161616 14px 28px);border-block:2px solid var(--ink);position:relative;z-index:1}
+.belt{position:relative;z-index:1;overflow:hidden;padding:18px 0 20px}
+.trk{display:flex;width:max-content;animation:belt 70s linear infinite;will-change:transform}
+.belt.rev .trk{animation-direction:reverse;animation-duration:85s}
+.belt:hover .trk{animation-play-state:paused}
+.set{display:flex;gap:18px;padding-right:18px}
+.tile{flex:none;width:74px;height:74px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:22px;background:var(--bg);box-shadow:4px 4px 0 var(--ink);transform:rotate(var(--r))}
+.tile svg{width:46px;height:46px;display:block}
+@keyframes belt{to{transform:translateX(-50%)}}
+.amb{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fl{position:absolute;left:0;opacity:.2;animation:drift var(--d) linear var(--dl) infinite;will-change:transform}
+.fl svg{width:100%;height:100%;display:block}
+@keyframes drift{from{transform:translate3d(-20vw,0,0) rotate(0)}to{transform:translate3d(120vw,var(--dy),0) rotate(var(--rot))}}
+
+/* ---------- conteúdo ---------- */
+.mt{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:28px 18px 8px;text-align:center;width:100%}
+.stage{position:relative;overflow:hidden;display:grid;place-items:center;height:310px;border-radius:40px;background:#ffe6c4;border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.stage::before{content:"";position:absolute;inset:auto 0 0 0;height:56px;background:repeating-linear-gradient(-45deg,#ffd23f 0 16px,#161616 16px 32px);border-top:2px solid var(--ink);opacity:.9}
+.big{position:relative;width:215px;margin-top:-18px;filter:drop-shadow(0 22px 26px #0003);animation:bob 3.2s ease-in-out infinite}
+.pill{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);margin:0;padding:6px 16px 6px 14px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-family:Silkscreen,monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.pill i{width:10px;height:10px;border-radius:50%;background:#ff7a1a;animation:pulse 1.3s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.55);opacity:.5}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+h1{font-size:clamp(1.9rem,5.6vw,2.9rem);line-height:1.08;margin:30px 0 18px}
+h1 mark{background:#ffd23f;border-radius:10px;padding:0 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.info{text-align:left;background:#fff;border:2px solid var(--ink);border-radius:40px;padding:30px 30px 28px;box-shadow:8px 8px 0 var(--ink)}
+.lede{font-size:clamp(1.2rem,3.6vw,1.5rem);line-height:1.4;font-weight:700;margin:0 0 14px}
+.more{font-size:clamp(1.02rem,2.9vw,1.15rem);line-height:1.7;margin:0;color:#2b2b2b}
+.sep{border:0;height:2px;background:var(--ink);border-radius:2px;margin:24px 0}
+.kv{display:grid;gap:6px}
+.k{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#555}
+.v{font-size:clamp(1.15rem,3.4vw,1.4rem);font-weight:700;line-height:1.45;white-space:pre-line;overflow-wrap:anywhere}
+
+/* ---------- Bup pedindo o telefone ---------- */
+.ask{text-align:left;margin-top:30px;background:#fff;border:2px solid var(--ink);border-radius:40px;padding:24px 26px 26px;box-shadow:8px 8px 0 var(--ink);transition:opacity .6s ease,transform .7s cubic-bezier(.2,1.2,.3,1)}
+.ask.pre{opacity:0;transform:translateY(40px) scale(.96)}
+.row{display:flex;align-items:flex-end;gap:16px}
+.mini{position:relative;flex:none;width:92px;transform-origin:50% 100%}
+.mini>svg{animation:bob 2.6s ease-in-out infinite}
+.pre .mini,.pre .bub{opacity:0}
+.go .mini{animation:popin .75s .35s cubic-bezier(.2,1.5,.4,1) both}
+.go .bub{animation:popbub .5s 1s cubic-bezier(.2,1.4,.4,1) both;transform-origin:0 100%}
+@keyframes popin{from{opacity:0;transform:translateY(46px) scale(.5)}to{opacity:1;transform:none}}
+@keyframes popbub{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.bub{position:relative;flex:1;min-height:4.6em;background:#fff6c9;border:2px solid var(--ink);border-radius:24px;padding:14px 18px;font-weight:700;font-size:1.05rem;line-height:1.45}
+.bub::before{content:"";position:absolute;left:-11px;bottom:24px;width:18px;height:18px;background:#fff6c9;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
+.bub p{margin:0}
+.bub .t.typing::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:3px;vertical-align:-.17em;background:var(--ink);animation:caret .8s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.fw{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.2,.9,.3,1)}
+.fw.open{grid-template-rows:1fr}
+.fi{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s .6s}
+.fw.open .fi{visibility:visible;transition-delay:0s}
+.fp{padding:18px 6px 6px;opacity:0;transform:translateY(14px);transition:opacity .45s .2s,transform .55s .2s cubic-bezier(.2,1.3,.4,1)}
+.fw.open .fp{opacity:1;transform:none}
+.fr{display:flex;gap:10px;flex-wrap:wrap}.fr input{flex:1;min-width:190px}.fr .btn{flex:none;font-size:1.02rem;padding:13px 26px}.fr .btn[disabled]{opacity:.6;cursor:wait}
+.ask .err{margin-top:8px;text-align:center}
+.done{display:flex;align-items:center;gap:14px;margin:0;font-weight:700;font-size:1.08rem;line-height:1.45}
+.done svg{flex:none;width:46px;height:46px}.done circle{fill:#c8f2cf;stroke:var(--ink);stroke-width:3}
+.done path{fill:none;stroke:var(--ink);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:34;stroke-dashoffset:34;animation:draw .5s .15s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ht{position:absolute;left:50%;bottom:55%;width:18px;pointer-events:none;animation:rise 1.5s ease-out forwards}
+@keyframes rise{from{opacity:0;transform:translate(-50%,0) scale(.5)}15%{opacity:1}to{opacity:0;transform:translate(calc(-50% + var(--x)),-90px) scale(1.2) rotate(var(--r))}}
+
+/* ---------- carinha do Bup (capacete) ---------- */
+.fc{display:block;width:100%;overflow:visible}
+.fc .head{transform-origin:60px 112px}
+.fc .gh{display:none}.fc.happy .gh{display:block}.fc.happy .gl,.fc.happy .gm,.fc.happy .gb{display:none}
+.fc.look .head{animation:sway 5s ease-in-out infinite}
+.fc.look .pu{animation:lookp 5s ease-in-out infinite}
+.fc .gl{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+.fc .sw{animation:drip 2.2s ease-in infinite}
+@keyframes sway{0%,8%,100%{transform:translateX(0) rotate(0)}20%,38%{transform:translateX(-5px) rotate(-6deg)}54%,74%{transform:translateX(5px) rotate(6deg)}88%{transform:translateX(0) rotate(0)}}
+@keyframes lookp{0%,8%,100%{transform:translateX(0)}20%,38%{transform:translateX(-5.5px)}54%,74%{transform:translateX(5.5px)}88%{transform:translateX(0)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+@keyframes drip{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}100%{opacity:0;transform:translateY(20px)}}
+
+/* ---------- From Ticord (igual à tela de carregamento) ---------- */
+.lf{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:30px 0 max(30px,env(safe-area-inset-bottom,0px) + 24px);color:#8a8a8a;font-weight:500;font-size:.85rem;letter-spacing:.04em}
+.lf img{height:46px;width:auto;display:block}
+.pvb{position:sticky;top:0;z-index:5;background:#161616;color:#fff;text-align:center;font-weight:700;font-size:.85rem;padding:8px 12px}
+
+@media(max-width:560px){
+ .stage{height:260px}.big{width:175px}.info{padding:24px 20px 22px;border-radius:32px}.ask{padding:20px 18px 22px;border-radius:32px}
+ .row{gap:12px}.mini{width:74px}.bub{padding:12px 14px;font-size:.98rem}.tile{width:62px;height:62px;border-radius:19px}.tile svg{width:38px;height:38px}.fr .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ .trk,.fl,.big,.mini>svg,.pill i,.fc .head,.fc .pu,.fc .gl,.fc .sw,.go .mini,.go .bub{animation:none!important}
+ .amb{display:none}.ask,.fw,.fp{transition:none}.ask.pre{transform:none}.bub .t.typing::after{animation:none}.done path{animation:none;stroke-dashoffset:0}
+}
+</style></head><body>
+
+<!-- ícones: ferramentas e carinhas do Bup -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-wrench" viewBox="0 0 48 48"><g transform="rotate(-40 24 24)" fill="#ffd23f" stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><rect x="20" y="22" width="8" height="22" rx="4"/><path d="M13 4h8v9h6V4h8v13a11 11 0 0 1-22 0z"/></g></symbol>
+<symbol id="i-gear" viewBox="0 0 48 48"><g fill="#8fb3ff" stroke="#161616" stroke-width="3" stroke-linejoin="round"><rect x="20.5" y="2.5" width="7" height="10" rx="2"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(45 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(90 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(135 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(180 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(225 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(270 24 24)"/><rect x="20.5" y="2.5" width="7" height="10" rx="2" transform="rotate(315 24 24)"/><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="5" fill="#fff"/></g></symbol>
+<symbol id="i-hammer" viewBox="0 0 48 48"><g transform="rotate(35 24 24)" stroke="#161616" stroke-width="3" stroke-linejoin="round"><rect x="21" y="14" width="6" height="30" rx="3" fill="#c98a4b"/><rect x="9" y="5" width="30" height="13" rx="3.5" fill="#b9c2d0"/></g></symbol>
+<symbol id="i-screw" viewBox="0 0 48 48"><g transform="rotate(-35 24 24)" fill="#b9c2d0" stroke="#161616" stroke-width="3" stroke-linejoin="round"><rect x="18" y="3" width="12" height="17" rx="5" fill="#ff6b6b"/><rect x="22" y="20" width="4" height="19"/><path d="M22 39h4l-1 5h-2z"/></g></symbol>
+<symbol id="i-nut" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round"><path d="M24 5l16 9v20l-16 9-16-9V14z" fill="#b5e48c"/><circle cx="24" cy="24" r="7" fill="#fff"/></g></symbol>
+<symbol id="i-hardhat" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round"><path d="M7 32a17 17 0 0 1 34 0z" fill="#ff7a1a"/><path d="M20 31c0-10 2-17 4-17s4 7 4 17z" fill="#ffa64d"/><rect x="3" y="31" width="42" height="8" rx="4" fill="#ff7a1a"/></g></symbol>
+<symbol id="i-plug" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><rect x="18" y="6" width="4" height="12" rx="1.5" fill="#b9c2d0"/><rect x="26" y="6" width="4" height="12" rx="1.5" fill="#b9c2d0"/><rect x="14" y="18" width="20" height="14" rx="4" fill="#ffb3d9"/><path d="M24 32v5c0 5 5 7 10 7" fill="none"/></g></symbol>
+<symbol id="i-server" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="6" width="36" height="11" rx="3.5" fill="#8fd3ff"/><rect x="6" y="19" width="36" height="11" rx="3.5" fill="#8fd3ff"/><rect x="6" y="32" width="36" height="11" rx="3.5" fill="#8fd3ff"/><path d="M26 11.5h10M26 24.5h10M26 37.5h10" fill="none"/><g fill="#161616" stroke="none"><circle cx="13" cy="11.5" r="2"/><circle cx="13" cy="24.5" r="2"/><circle cx="13" cy="37.5" r="2"/></g></g></symbol>
+<symbol id="i-cone" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round"><path d="M24 5l10 31H14z" fill="#ff7a1a"/><path d="M19.2 20h9.6l2.3 7H16.9z" fill="#fff"/><rect x="8" y="36" width="32" height="7" rx="2.5" fill="#ffa64d"/></g></symbol>
+<symbol id="i-bolt" viewBox="0 0 48 48"><path d="M27 3L10 27h11l-3 18 20-26H27z" fill="#ffd23f" stroke="#161616" stroke-width="3" stroke-linejoin="round"/></symbol>
+<symbol id="i-bug" viewBox="0 0 48 48"><g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M20 10l-4-6M28 10l4-6M7 22l8 3M41 22l-8 3M7 33l8-2M41 33l-8-2M9 43l8-7M39 43l-8-7" fill="none"/><ellipse cx="24" cy="29" rx="12" ry="14" fill="#ff6b6b"/><circle cx="24" cy="12" r="6" fill="#3a2a1a"/><path d="M24 15v28" fill="none"/><g fill="#161616" stroke="none"><circle cx="18" cy="26" r="2.4"/><circle cx="30" cy="26" r="2.4"/><circle cx="19" cy="36" r="2.4"/><circle cx="29" cy="36" r="2.4"/></g></g></symbol>
+<symbol id="f-happy" viewBox="0 0 48 48"><g stroke="#3a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19" fill="#ffd23f"/><path d="M14 22q3-5 6 0M28 22q3-5 6 0M15 29q9 9 18 0" fill="none"/></g></symbol>
+<symbol id="f-sleep" viewBox="0 0 48 48"><g stroke="#3a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19" fill="#b7c8f5"/><path d="M14 24q3 3.5 6 0M28 24q3 3.5 6 0M21 33q3 2.5 6 0" fill="none"/><path d="M36 8h6l-6 7h6" fill="none" stroke-width="2.4"/></g></symbol>
+<symbol id="f-wow" viewBox="0 0 48 48"><g stroke="#3a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19" fill="#bff0a0"/><path d="M13 15q4-4 8 0M27 15q4-4 8 0" fill="none"/><circle cx="17" cy="23" r="2.4" fill="#3a2a1a" stroke="none"/><circle cx="31" cy="23" r="2.4" fill="#3a2a1a" stroke="none"/><ellipse cx="24" cy="34" rx="3.4" ry="4.4" fill="#3a2a1a"/></g></symbol>
+<symbol id="f-sad" viewBox="0 0 48 48"><g stroke="#3a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19" fill="#ffc2e0"/><path d="M13 19l8-3M35 19l-8-3M17 36q7-6 14 0" fill="none"/><circle cx="17" cy="25" r="2.4" fill="#3a2a1a" stroke="none"/><circle cx="31" cy="25" r="2.4" fill="#3a2a1a" stroke="none"/></g></symbol>
+<symbol id="f-hat" viewBox="0 0 48 48"><g stroke="#3a2a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="29" r="16" fill="#ffd23f"/><path d="M11 22a13 13 0 0 1 26 0z" fill="#ff7a1a"/><rect x="7" y="21" width="34" height="6" rx="3" fill="#ff7a1a"/><circle cx="18" cy="33" r="2.2" fill="#3a2a1a" stroke="none"/><circle cx="30" cy="33" r="2.2" fill="#3a2a1a" stroke="none"/><path d="M19 40q5 3 10 0" fill="none"/></g></symbol>
+</defs></svg>
+
+<div id="pvb" class="pvb" hidden>Prévia da página · a manutenção não está ligada agora</div>
+<div class="amb" id="amb" aria-hidden="true"></div>
+<div class="tape" aria-hidden="true"></div>
+<div class="belt" id="b1" aria-hidden="true"></div>
+<div class="tape" aria-hidden="true"></div>
+
+<main class="mt">
+<section class="stage" aria-label="O Bup de capacete olhando para os lados"><div class="big" id="big"></div><p class="pill"><i></i>Manutenção em andamento</p></section>
+<h1>O Bup está <mark>em manutenção</mark></h1>
+<section class="info" aria-label="Detalhes da manutenção">
+<p class="lede">A infraestrutura da Ticord está passando por problemas técnicos e precisa ser restaurada em breve. Pedimos a sua compreensão.</p>
+<p class="more">Sabemos que é chato chegar aqui e dar de cara com o Bup de capacete, mas é isso que a gente faz quando alguma coisa quebra: para tudo, coloca o capacete e conserta com cuidado. Nossa equipe já está trabalhando para deixar tudo funcionando de novo o mais rápido possível, com calma para não criar um problema novo no meio do caminho. Assim que o Bup estiver de volta, esta página some sozinha e o site abre normalmente. Obrigado pela paciência e por continuar com a gente.</p>
+<hr class="sep">
+<div class="kv"><span class="k">Programador Responsável:</span><span class="v" id="dev">—</span></div>
+<hr class="sep">
+<div class="kv"><span class="k">Motivo:</span><span class="v" id="why">—</span></div>
+</section>
+
+<section class="ask pre" id="ask" aria-labelledby="at">
+<h2 class="sr" id="at">Receber um aviso quando o Bup voltar</h2>
+<div class="row"><div class="mini" id="mini"></div><div class="bub"><span class="sr" id="bfull"></span><p class="t" id="bt" aria-hidden="true"></p></div></div>
+<div class="fw" id="fw"><div class="fi"><div class="fp">
+<form id="f" novalidate><div class="fr"><input id="ph" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 99999-9999" maxlength="16" aria-label="Seu telefone com DDD"><button class="btn" id="go" type="submit">Me avise!</button></div>
+<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true"><p class="err" id="er" role="alert"></p></form>
+<p class="done" id="ok" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20"/><path d="M14 25l7 7 14-15"/></svg><span id="okt"></span></p>
+</div></div></div>
+</section>
+</main>
+
+<div class="tape" aria-hidden="true" style="margin-top:34px"></div>
+<div class="belt rev" id="b2" aria-hidden="true"></div>
+<div class="tape" aria-hidden="true"></div>
+<div class="lf"><span>From</span><img src="/assets/ticord-preto.png" alt="Ticord Grupo"></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const PV=new URLSearchParams(location.search).has('preview');
+
+/* ---------- carinha do Bup com capacete ---------- */
+let fid=0;
+const face=()=>{const k='mf'+fid++;return `<svg class="fc" viewBox="-12 -22 144 154" aria-hidden="true"><defs><radialGradient id="${k}" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe066"/><stop offset="1" stop-color="#ffa62b"/></radialGradient></defs>
+<g class="head"><circle cx="60" cy="60" r="58" fill="#fff"/><circle cx="60" cy="60" r="52" fill="url(#${k})"/>
+<g fill="none" stroke="#3a2a1a" stroke-linecap="round" stroke-linejoin="round">
+<path class="gb" d="M29 53L51 46M91 53L69 46" stroke-width="5"/>
+<g class="gl"><circle cx="42" cy="68" r="11" fill="#fff" stroke-width="3"/><circle cx="78" cy="68" r="11" fill="#fff" stroke-width="3"/><g class="pu" fill="#3a2a1a" stroke="none"><circle cx="42" cy="68" r="5.5"/><circle cx="78" cy="68" r="5.5"/></g></g>
+<path class="gm" d="M46 96q7-5 14 0t14 0" stroke-width="5"/>
+<g class="gh" stroke-width="5"><path d="M31 68q11-14 22 0M67 68q11-14 22 0M42 90q18 17 36 0"/><g fill="#ff7ab8" stroke="none" opacity=".6"><ellipse cx="24" cy="86" rx="7" ry="4"/><ellipse cx="96" cy="86" rx="7" ry="4"/></g></g>
+</g>
+<path class="sw" d="M99 50q7 10 0 15q-7-5 0-15z" fill="#7fb4ff"/>
+<g stroke="#3a2a1a" stroke-linejoin="round" stroke-linecap="round"><path d="M18 38C18 6 42-10 60-10C78-10 102 6 102 38z" fill="#ff7a1a" stroke-width="4"/><path d="M50 36C50 10 54-8 60-8C66-8 70 10 70 36z" fill="#ffa64d" stroke-width="3"/><rect x="8" y="34" width="104" height="10" rx="5" fill="#ff7a1a" stroke-width="4"/><path d="M28 27C30 14 38 4 47 0" fill="none" stroke="#fff" stroke-width="4" opacity=".6"/></g>
+</g></svg>`};
+$('#big').innerHTML=face();$('#big .fc').classList.add('look');
+$('#mini').innerHTML=face();const mf=$('#mini .fc');
+
+/* ---------- esteiras e ferramentas ao fundo ---------- */
+const PAL=['#fff0a8','#ffd3e8','#dff0ff','#dff3cf','#e6dcff','#ffe6c4'],ROT=[-6,4,-3,7,-5,3];
+const tile=(id,i)=>`<span class="tile" style="--bg:${PAL[i%PAL.length]};--r:${ROT[i%ROT.length]}deg"><svg viewBox="0 0 48 48"><use href="#${id}"/></svg></span>`;
+const belt=ids=>{const one=ids.concat(ids).map(tile).join('');return `<div class="trk"><div class="set">${one}</div><div class="set">${one}</div></div>`};
+$('#b1').innerHTML=belt(['f-hat','i-wrench','i-gear','f-happy','i-hammer','i-bug','f-wow','i-nut','i-server','f-sleep','i-hardhat','i-plug','i-bolt','f-sad','i-screw','i-cone']);
+$('#b2').innerHTML=belt(['i-cone','f-wow','i-plug','i-hardhat','f-happy','i-gear','i-bolt','f-hat','i-screw','i-server','f-sad','i-wrench','i-bug','f-sleep','i-nut','i-hammer']);
+if(!RM){const T=['i-wrench','i-gear','i-hammer','i-screw','i-nut','i-hardhat','i-plug','i-bolt','i-bug','i-cone','f-hat','f-happy'];
+ $('#amb').innerHTML=T.map((id,i)=>{const s=56+Math.round(Math.random()*54),top=4+Math.random()*84,dur=42+Math.random()*40;
+  return `<span class="fl" style="top:${top.toFixed(1)}%;width:${s}px;height:${s}px;--d:${dur.toFixed(1)}s;--dl:-${(Math.random()*dur).toFixed(1)}s;--dy:${Math.round(-18+Math.random()*36)}vh;--rot:${Math.random()<.5?-1:1}${180+Math.round(Math.random()*180)}deg"><svg viewBox="0 0 48 48"><use href="#${id}"/></svg></span>`}).join('')}
+
+/* ---------- texto da manutenção (vem do /developers-portal) ---------- */
+let mid='',pol=null;
+const put=d=>{$('#dev').textContent=d.dev||'Não informado';$('#why').textContent=d.reason||'Não informado'};
+const load=()=>fetch('/api/manutencao',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+ if(!d)return;
+ if(!d.on){if(!PV){location.replace('/');return}$('#pvb').hidden=false;put({dev:'Nome do programador (exemplo)',reason:'Motivo da manutenção (exemplo)'});return}
+ mid=String(d.id||'');put(d)}).catch(()=>{});
+load().then(()=>{pol=setInterval(load,10000)});
+
+/* ---------- o Bup pede o telefone ---------- */
+const ask=$('#ask'),bt=$('#bt'),fw=$('#fw'),ph=$('#ph'),f=$('#f'),er=$('#er'),go=$('#go');
+const LINE='Psiu! Deixa seu telefone aqui que eu te aviso quando eu voltar?';
+const said=()=>{try{return localStorage.getItem('bup_mt_sent')}catch(e){return null}};
+const hearts=()=>{if(RM)return;const w=$('#mini');for(let i=0;i<7;i++){const h=document.createElement('span');h.className='ht';h.style.cssText=`--x:${Math.round(-40+Math.random()*80)}px;--r:${Math.round(-25+Math.random()*50)}deg;animation-delay:${(i*.14).toFixed(2)}s`;
+ h.innerHTML='<svg viewBox="0 0 20 18"><path d="M10 18C2 12 0 8 0 5a5 5 0 0 1 10-2 5 5 0 0 1 10 2c0 3-2 7-10 13z" fill="#e5195f"/></svg>';w.appendChild(h);setTimeout(()=>h.remove(),2200)}};
+const say=(txt,cb)=>{$('#bfull').textContent=txt;if(RM){bt.textContent=txt;cb&&cb();return}
+ bt.textContent='';bt.classList.add('typing');let i=0;const n=()=>{bt.textContent=txt.slice(0,++i);if(i<txt.length)setTimeout(n,32);else{bt.classList.remove('typing');cb&&cb()}};n()};
+const finish=(msg)=>{mf.classList.add('happy');f.hidden=true;$('#okt').textContent=msg;$('#ok').hidden=false;fw.classList.add('open');hearts()};
+let started=false;
+const start=()=>{if(started)return;started=true;ask.classList.remove('pre');ask.classList.add('go');
+ const sent=said();
+ setTimeout(()=>{
+  if(sent&&sent===mid&&mid){say('Você já me deixou seu número. Eu te aviso quando voltar!',()=>{mf.classList.add('happy');hearts()});return}
+  say(LINE,()=>setTimeout(()=>fw.classList.add('open'),250))
+ },RM?0:1150)};
+if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();setTimeout(start,RM?0:500)}},{threshold:.35});io.observe(ask)}else start();
+
+ph.addEventListener('input',()=>{const d=ph.value.replace(/\D/g,'').slice(0,11);let s=d;if(d.length>2)s='('+d.slice(0,2)+') '+(d.length>10?d.slice(2,7)+'-'+d.slice(7):d.slice(2,6)+(d.length>6?'-'+d.slice(6):''));ph.value=s});
+f.addEventListener('submit',async e=>{e.preventDefault();er.textContent='';
+ const d=ph.value.replace(/\D/g,'');
+ if(!(d.length===10||(d.length===11&&d[2]==='9'))){er.textContent='Telefone inválido. Use DDD + número.';return ph.focus()}
+ go.disabled=true;go.textContent='Enviando...';mf.classList.remove('look');
+ try{
+  if(!PV){const r=await fetch('/api/manutencao',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:ph.value,site:f.site.value})});
+   const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Não deu pra enviar agora. Tente de novo.');
+   try{localStorage.setItem('bup_mt_sent',mid)}catch(x){}}
+  say('Anotado! Eu te aviso assim que voltar.');finish('Pronto! Anotamos o número '+ph.value+'.');
+ }catch(x){er.textContent=x.message;go.disabled=false;go.textContent='Me avise!'}});
+})();
+</script></body></html>

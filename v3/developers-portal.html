@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Portal de Desenvolvedores · Ticord</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"><link rel="stylesheet" href="/site.css?v=3"><style>
+body{padding-top:0}.ad{max-width:960px;margin:0 auto;padding:28px 20px 60px;width:100%}
+.ad h1{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 6px}.ad .lead{margin:0 0 22px;font-size:1rem}.lead a{font-weight:700;margin-right:12px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.hd .btn{padding:9px 18px;font-size:.9rem}
+.login{max-width:420px;margin:12vh auto 0}.login form{display:grid;gap:12px}
+.lc{padding:24px 26px;margin-bottom:26px}.lc h2{font-size:1.4rem;margin:0 0 10px}
+.bd{display:inline-block;font-weight:700;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;margin:0 0 16px;background:#c8f2cf}.bd.off{background:#ffd0cc}
+.fg{display:grid;gap:14px;margin-bottom:6px}.fg label{font-weight:700;font-size:.9rem;display:grid;gap:6px}.fg small{font-weight:400;color:#666}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+textarea,select{font:inherit;border:2px solid var(--ink);background:#fff;border-radius:24px;padding:12px 18px;width:100%}textarea{resize:vertical;min-height:92px;line-height:1.45}select{border-radius:999px;width:auto}
+textarea:focus-visible,select:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+input[type=file]{border-radius:20px;padding:10px 14px;font-size:.9rem}
+.lbt{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.lbt .btn{padding:10px 18px;font-size:.9rem}.btn.ok{background:#1b7f3b;border-color:#1b7f3b}.btn[disabled]{opacity:.6;cursor:wait}
+.msg{min-height:1.3em;margin:10px 0 0;font-weight:700;font-size:.92rem}.msg.e{color:#c62828}.msg.g{color:#1b7f3b}
+.hint2{font-size:.85rem;color:#666;margin:12px 0 0;line-height:1.5}
+.pvw{display:flex;gap:12px;align-items:center;margin-top:-4px}.pvw img{max-height:96px;max-width:160px;border:2px solid var(--ink);border-radius:14px;object-fit:cover}
+.pl{display:grid;gap:12px;margin-top:22px}.pi{display:flex;gap:14px;align-items:center;background:#fff;border:2px solid var(--ink);border-radius:22px;padding:12px 14px}
+.pi img,.pi .ph0{flex:none;width:74px;height:74px;border-radius:14px;border:2px solid var(--ink);object-fit:cover;background:#f1f1f5;display:grid;place-items:center;font-size:.7rem;color:#777;text-align:center}
+.pi div{flex:1;min-width:0}.pi b{display:block;overflow-wrap:anywhere}.pi p{margin:2px 0;font-size:.9rem;color:#444;overflow-wrap:anywhere;white-space:pre-line;max-height:3em;overflow:hidden}.pi small{color:#666;overflow-wrap:anywhere}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}.bar input[type=search]{flex:1;min-width:170px;padding:10px 18px}.bar .btn{padding:10px 18px;font-size:.9rem}.bar select{padding:10px 16px}
+.cnt{font-weight:700;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 16px}
+.tw{overflow-x:auto;background:#fff;border:2px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink)}
+table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:12px 16px;border-bottom:1px solid #e4e4ea;white-space:nowrap}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#555}tr:last-child td{border-bottom:0}td a{font-weight:700;color:#1b7f3b}
+.x{all:unset;cursor:pointer;color:#c62828;font-weight:700;padding:2px 8px;border-radius:8px}.x:hover{background:#fde8e8}.x:focus-visible{outline:3px solid var(--b)}
+.empty{text-align:center;padding:30px;color:#666;white-space:normal}
+@media(max-width:620px){.two{grid-template-columns:1fr}.lc{padding:20px 18px}}
+</style></head><body><main class="ad">
+
+<section class="card login" id="lg"><h1>Portal de Desenvolvedores</h1><p class="lead">Área restrita da Ticord. Digite a chave de acesso (ADMIN_KEY).</p>
+<form id="lf"><input id="key" type="password" autocomplete="current-password" placeholder="Chave de acesso" required><p class="err" id="le" role="alert"></p><button class="btn" type="submit">Entrar</button></form></section>
+
+<section id="pn" hidden>
+<div class="hd"><h1>Portal de Desenvolvedores</h1><div class="lbt" style="margin:0"><button class="btn alt" id="rf" type="button">Atualizar</button><button class="btn alt" id="out" type="button">Sair</button></div></div>
+<p class="lead">Manutenção do site, popups e envios de telefone. <a href="/admin">Administração →</a><a href="/gestao">Gestão de contas →</a></p>
+
+<section class="card lc" aria-labelledby="mt"><h2 id="mt">Modo manutenção</h2>
+<span class="bd" id="mb" role="status">Carregando...</span>
+<div class="fg">
+<label>Programador responsável<input id="mdev" type="text" maxlength="60" placeholder="Ex.: Luan" autocomplete="off"></label>
+<label>Motivo<textarea id="mwhy" maxlength="400" placeholder="Ex.: Queda no banco de dados, restaurando backup."></textarea><small>Os dois campos aparecem na página de manutenção para quem entrar no site.</small></label>
+</div>
+<div class="lbt" id="mbt">
+<button class="btn danger" id="mon" type="button">Deixar em manutenção</button>
+<button class="btn" id="msave" type="button" hidden>Salvar alterações</button>
+<button class="btn ok" id="moff" type="button" hidden>Tirar da manutenção</button>
+</div>
+<div class="lbt">
+<a class="btn alt sm" href="/manutencao?preview=1" target="_blank" rel="noopener">Ver a página de manutenção</a>
+<button class="btn alt sm" id="mview" type="button">Ver o site mesmo em manutenção</button>
+<button class="btn alt sm" id="mend" type="button">Sair da prévia</button>
+</div>
+<p class="msg" id="mm" role="alert"></p>
+<p class="hint2">Com a manutenção ligada, quem abrir qualquer página do site vê a página de manutenção (quem já estava navegando é levado para lá ao trocar de página). Ao tirar da manutenção, a página some sozinha e o site abre. "Ver o site mesmo em manutenção" libera só este navegador por 2 horas (mesma prévia do /admin). Os popups só aparecem para o público com o site no ar.</p></section>
+
+<section class="card lc" aria-labelledby="pt"><h2 id="pt">Popups do site</h2>
+<p class="hint2" style="margin:0 0 14px">Cada popup aparece uma vez por visita (por aba do navegador) para quem entra no site, um de cada vez. Remova para parar de mostrar.</p>
+<form id="pf" class="fg" novalidate>
+<div class="two"><label>Título <small>(opcional)</small><input id="ptit" type="text" maxlength="80" autocomplete="off"></label>
+<label>Texto do botão <small>(opcional)</small><input id="pbl" type="text" maxlength="40" placeholder="Ex.: Saiba mais" autocomplete="off"></label></div>
+<label>Texto<textarea id="pbody" maxlength="600" placeholder="Mensagem do popup"></textarea></label>
+<div class="two"><label>Imagem <small>(envie um arquivo; até ~600 KB depois de reduzida)</small><input id="pfile" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+<label>ou link da imagem <small>(https://...)</small><input id="purl" type="url" maxlength="480" placeholder="https://" autocomplete="off"></label></div>
+<div class="pvw" id="pvw" hidden><img id="pimg" alt="Prévia da imagem"><button class="x" id="pclr" type="button">Remover imagem</button></div>
+<label>Link do botão <small>(https://... ou um caminho do site, como /faq)</small><input id="pbu" type="text" maxlength="500" placeholder="https://exemplo.com" autocomplete="off"></label>
+<div class="lbt" style="margin-top:0"><button class="btn alt" id="ppre" type="button">Pré-visualizar</button><button class="btn" id="padd" type="submit">Criar popup</button></div>
+<p class="msg" id="pm" role="alert"></p></form>
+<h3 style="margin:22px 0 0">Popups ativos <span class="cnt" id="pc" style="font-size:.85rem;margin-left:6px">0</span></h3>
+<div class="pl" id="pl"></div></section>
+
+<section aria-labelledby="et"><h2 id="et" style="font-size:1.4rem;margin:0 0 6px">Envios da manutenção</h2><p class="lead">Telefones que as pessoas deixaram na página de manutenção.</p>
+<div class="bar"><select id="ps" aria-label="Qual manutenção"></select><input id="q" type="search" placeholder="Buscar por telefone"><span class="cnt" id="ct">0</span><button class="btn" id="csv" type="button">Baixar CSV</button></div>
+<div class="tw"><table><thead><tr><th>#</th><th>Telefone</th><th>Quando</th><th>Manutenção</th><th></th></tr></thead><tbody id="tb"></tbody></table></div></section>
+</section>
+</main><script>
+(()=>{
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let key='',S=null,dirty=false,img='';try{key=sessionStorage.getItem('adm')||''}catch(e){}
+const fmtP=p=>{const d=String(p).replace(/^55/,'');return d.length===11?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`};
+const fmtD=t=>new Date(t).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+const fmtM=id=>/^\d{10,}$/.test(id)?fmtD(+id):'—';
+const api=b=>fetch('/api/admin-maintenance',{method:b?'POST':'GET',headers:Object.assign({'x-admin-key':key},b?{'Content-Type':'application/json'}:{}),body:b?JSON.stringify(b):undefined}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Erro'),{st:r.status});return j});
+const bye=()=>{key='';try{sessionStorage.removeItem('adm')}catch(e){}$('#pn').hidden=true;$('#lg').hidden=false;$('#key').value=''};
+const fail=(x,el)=>{if(x.st===401)return bye();el.textContent=x.message;el.className='msg e'};
+const ok=(el,t)=>{el.textContent=t;el.className='msg g'};
+
+/* ---------- manutenção ---------- */
+const paintM=(fill)=>{const m=S.maint;
+ $('#mb').textContent=m.on?'Site em manutenção'+(m.since?' desde '+fmtD(m.since):''):'Site no ar';$('#mb').classList.toggle('off',m.on);
+ $('#mon').hidden=m.on;$('#msave').hidden=!m.on;$('#moff').hidden=!m.on;
+ if(fill||!dirty){$('#mdev').value=m.dev||'';$('#mwhy').value=m.reason||'';dirty=false}};
+['#mdev','#mwhy'].forEach(s=>$(s).addEventListener('input',()=>dirty=true));
+const act=async(b,msg)=>{const el=$('#mm');el.textContent='';el.className='msg';try{S=await api(b);paintM(true);drawAll();ok(el,msg)}catch(x){fail(x,el)}};
+const vals=()=>({dev:$('#mdev').value.trim(),reason:$('#mwhy').value.trim()});
+const need=()=>{const v=vals();if(!v.dev||!v.reason){const el=$('#mm');el.textContent='Preencha o programador responsável e o motivo.';el.className='msg e';return null}return v};
+$('#mon').onclick=()=>{const v=need();if(v&&confirm('Deixar o Bup em manutenção agora? Todo mundo que entrar no site verá a página de manutenção.'))act({action:'on',...v},'Site em manutenção.')};
+$('#msave').onclick=()=>{const v=need();if(v)act({action:'save',...v},'Alterações salvas.')};
+$('#moff').onclick=()=>{if(confirm('Tirar o Bup da manutenção? O site volta ao normal para todo mundo.'))act({action:'off'},'Site fora da manutenção.')};
+$('#mview').onclick=async()=>{const el=$('#mm');el.textContent='';el.className='msg';const w=window.open('about:blank','_blank');try{const r=await fetch('/api/admin-preview',{method:'POST',headers:{'x-admin-key':key}});if(!r.ok){const j=await r.json().catch(()=>({}));throw Object.assign(new Error(j.error||'Erro'),{st:r.status})}w?w.location.href='/':location.href='/'}catch(x){if(w)w.close();fail(x,el)}};
+$('#mend').onclick=async()=>{const el=$('#mm');try{const r=await fetch('/api/admin-preview',{method:'DELETE',headers:{'x-admin-key':key}});if(!r.ok)throw new Error('Erro');ok(el,'Prévia encerrada neste navegador. Agora você vê o site como o público.')}catch(x){fail(x,el)}};
+
+/* ---------- popups ---------- */
+const okUrl=u=>/^(https?:\/\/[^\s]+|\/(?!\/)[^\s]*)$/i.test(u);
+const setImg=u=>{img=u;$('#pvw').hidden=!u;if(u)$('#pimg').src=u};
+const prep=f=>new Promise((res,no)=>{
+ if(!/^image\/(png|jpeg|webp|gif)$/.test(f.type))return no(new Error('Use uma imagem PNG, JPG, WEBP ou GIF.'));
+ const rd=new FileReader();rd.onerror=()=>no(new Error('Não consegui ler o arquivo.'));
+ rd.onload=()=>{
+  if(f.size<=450*1024)return res(rd.result); /* pequena: vai como está (mantém transparência e GIF animado) */
+  if(f.type==='image/gif')return no(new Error('GIF grande demais (máximo ~450 KB).'));
+  const im=new Image();im.onerror=()=>no(new Error('Não consegui ler a imagem.'));
+  im.onload=()=>{const s=Math.min(1,900/Math.max(im.width,im.height)),w=Math.round(im.width*s),h=Math.round(im.height*s),c=document.createElement('canvas');c.width=w;c.height=h;
+   const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);
+   let q=.85,u=c.toDataURL('image/jpeg',q);while(u.length>700000&&q>.4){q-=.1;u=c.toDataURL('image/jpeg',q)}
+   u.length>700000?no(new Error('Imagem pesada demais, escolha outra.')):res(u)};
+  im.src=rd.result};
+ rd.readAsDataURL(f)});
+$('#pfile').onchange=async e=>{const f=e.target.files[0];$('#pm').textContent='';if(!f)return;
+ try{setImg(await prep(f));$('#purl').value=''}catch(x){e.target.value='';setImg('');fail(x,$('#pm'))}};
+$('#purl').oninput=()=>{const v=$('#purl').value.trim();$('#pfile').value='';setImg(/^https:\/\/\S+$/i.test(v)?v:'')};
+$('#pclr').onclick=()=>{$('#pfile').value='';$('#purl').value='';setImg('')};
+const pdata=()=>({title:$('#ptit').value.trim(),body:$('#pbody').value.trim(),image:img||$('#purl').value.trim(),btn_label:$('#pbl').value.trim(),btn_url:$('#pbu').value.trim()});
+const pcheck=p=>{if(!p.title&&!p.body&&!p.image)return 'O popup precisa de pelo menos título, texto ou imagem.';
+ if((p.btn_label||p.btn_url)&&!(p.btn_label&&p.btn_url))return 'Para o botão, preencha o texto e o link.';
+ if(p.btn_url&&!okUrl(p.btn_url))return 'Link do botão inválido. Use https://... ou um caminho como /faq.';
+ if(p.image&&!/^data:image\//.test(p.image)&&!/^https:\/\/\S+$/i.test(p.image))return 'O link da imagem precisa começar com https://';return ''};
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+$('#ppre').onclick=()=>{const p=pdata(),er=pcheck(p);if(er)return fail({message:er},$('#pm'));$('#pm').textContent='';
+ const ov=el('div','pp'),card=el('div','ppc');ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');
+ const x=el('button','ppx','\u2715');x.type='button';x.setAttribute('aria-label','Fechar');card.appendChild(x);
+ if(p.image){const im=el('img');im.src=p.image;im.alt='';card.appendChild(im)}
+ const b=el('div','ppb');if(p.title)b.appendChild(el('h3','',p.title));if(p.body)b.appendChild(el('p','',p.body));
+ if(p.btn_label){const a=el('a','btn',p.btn_label);a.href='#';a.onclick=e=>e.preventDefault();b.appendChild(a)}
+ card.appendChild(b);ov.appendChild(card);document.body.appendChild(ov);
+ const close=()=>{document.removeEventListener('keydown',key);ov.remove()},key=e=>{if(e.key==='Escape')close()};
+ document.addEventListener('keydown',key);x.onclick=close;ov.onclick=e=>{if(e.target===ov)close()};x.focus()};
+$('#pf').onsubmit=async e=>{e.preventDefault();const m=$('#pm'),p=pdata(),er=pcheck(p);m.className='msg';m.textContent='';if(er)return fail({message:er},m);
+ const b=$('#padd');b.disabled=true;try{S=await api({action:'popup_add',...p});$('#pf').reset();setImg('');drawAll();ok(m,'Popup criado. Já aparece no site.')}catch(x){fail(x,m)}b.disabled=false};
+$('#pl').onclick=async e=>{const b=e.target.closest('.x');if(!b||!confirm('Remover este popup?'))return;try{S=await api({action:'popup_del',id:+b.dataset.id});drawAll()}catch(x){fail(x,$('#pm'))}};
+const drawP=()=>{const l=S.popups;$('#pc').textContent=l.length;
+ $('#pl').innerHTML=l.length?l.map(p=>`<div class="pi">${p.image?`<img src="${esc(p.image)}" alt="" loading="lazy">`:'<span class="ph0">sem imagem</span>'}<div><b>${esc(p.title||'(sem título)')}</b>${p.body?`<p>${esc(p.body)}</p>`:''}<small>${p.btn_label?'Botão: '+esc(p.btn_label)+' → '+esc(p.btn_url):'Sem botão'} · criado em ${esc(fmtD(p.created_at))}</small></div><button class="x" data-id="${p.id}" type="button" aria-label="Remover popup">Remover</button></div>`).join(''):'<p class="empty" style="padding:14px">Nenhum popup ativo.</p>'};
+
+/* ---------- envios (telefones) ---------- */
+const drawE=()=>{const sel=$('#ps'),cur=S.maint.id,old=sel.value||'cur';
+ sel.innerHTML=`<option value="cur">${S.maint.on?'Manutenção atual':'Última manutenção'}</option><option value="all">Todas as manutenções</option>`;sel.value=old;
+ const q=$('#q').value.replace(/\D/g,''),all=sel.value==='all',l=S.phones.filter(r=>(all||r.maint_id===cur)&&(!q||r.phone.includes(q)));
+ const tot=S.phones.filter(r=>all||r.maint_id===cur).length;
+ $('#ct').textContent=l.length+(l.length===tot?(tot===1?' envio':' envios'):' de '+tot);
+ $('#tb').innerHTML=l.length?l.map((r,i)=>`<tr><td>${l.length-i}</td><td><a href="https://wa.me/${esc(r.phone)}" target="_blank" rel="noopener">${esc(fmtP(r.phone))}</a></td><td>${esc(fmtD(r.created_at))}</td><td>${esc(fmtM(r.maint_id))}</td><td><button class="x" data-id="${r.id}" type="button" aria-label="Remover ${esc(fmtP(r.phone))}">Remover</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">Nenhum envio ainda.</td></tr>'};
+$('#ps').onchange=drawE;$('#q').oninput=drawE;
+$('#tb').onclick=async e=>{const b=e.target.closest('.x');if(!b||!confirm('Remover este envio?'))return;try{S=await api({action:'phone_del',id:+b.dataset.id});drawE()}catch(x){fail(x,$('#mm'))}};
+$('#csv').onclick=()=>{const q=s=>'"'+String(s).replace(/"/g,'""')+'"',all=$('#ps').value==='all',rows=S.phones.filter(r=>all||r.maint_id===S.maint.id),
+ t='\ufefftelefone,data,manutencao\n'+rows.map(r=>[q('+'+r.phone),q(fmtD(r.created_at)),q(fmtM(r.maint_id))].join(',')).join('\n'),a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([t],{type:'text/csv;charset=utf-8'}));a.download='envios-manutencao.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+
+const drawAll=()=>{drawP();drawE()};
+const load=async fill=>{S=await api();$('#lg').hidden=true;$('#pn').hidden=false;paintM(fill);drawAll()};
+$('#lf').onsubmit=async e=>{e.preventDefault();$('#le').textContent='';key=$('#key').value;try{await load(true);try{sessionStorage.setItem('adm',key)}catch(x){}}catch(x){$('#le').textContent=x.message}};
+$('#rf').onclick=()=>load(true).catch(x=>x.st===401?bye():alert(x.message));$('#out').onclick=bye;
+/* atualiza sozinho os envios e o estado (sem mexer no que está sendo digitado) */
+setInterval(()=>{if(!key||$('#pn').hidden||document.hidden)return;api().then(j=>{S=j;paintM(false);drawP();drawE()}).catch(x=>{if(x.st===401)bye()})},15000);
+if(key)load(true).catch(bye);
+})();
+</script></body></html>
