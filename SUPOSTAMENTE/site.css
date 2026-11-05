@@ -126,3 +126,37 @@ footer.lock{background:none;color:#6b6b6b;padding:10px 20px 26px;text-align:cent
 .ppx:hover{background:#ffd23f}.ppx:focus-visible{outline:3px solid var(--b);outline-offset:2px}
 @keyframes pp-fade{from{opacity:0}}@keyframes pp-out{to{opacity:0}}@keyframes pp-pop{from{opacity:0;transform:translateY(24px) scale(.9)}}
 @media(prefers-reduced-motion:reduce){.pp,.pp.out,.ppc{animation:none}}
+
+/* ===== NOVO VISUAL: "Bup Neon Candy" (sobrescreve o estilo anterior) ===== */
+:root{--ink:#1b1340;--b:#7c5cff;--pink:#ff5fa2;--sun:#ffd23f;--mint:#3de0b5}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:
+radial-gradient(600px 460px at 0% 0%,#ff5fa255,transparent 70%),radial-gradient(560px 560px at 100% 30%,#7c5cff55,transparent 70%),radial-gradient(640px 400px at 40% 100%,#3de0b544,transparent 70%),
+radial-gradient(#1b134014 1.2px,transparent 1.6px) 0 0/22px 22px,#fbf8ff;background-attachment:fixed}
+.logo{background:linear-gradient(100deg,#1b1340,#7c5cff 55%,#ff5fa2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{background:linear-gradient(135deg,#7c5cff,#ff5fa2);border:0;color:#fff;box-shadow:0 8px 22px #7c5cff55,inset 0 1px 0 #ffffff80;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 30px #7c5cff66,inset 0 1px 0 #ffffff80}
+.btn.ghost,.btn.alt{background:#ffffffcc;color:var(--ink);border:1.5px solid #1b134026;box-shadow:0 4px 14px #1b134014}
+.cta{background:linear-gradient(135deg,#1b1340,#4a2fbd 60%,#ff5fa2)}.cta .btn{background:var(--sun);color:var(--ink)}
+.nin nav a[aria-current],.tabs button[aria-selected=true]{background:linear-gradient(135deg,#7c5cff,#ff5fa2);color:#fff}
+.card,.tile,.chat,.ppc{border:1.5px solid #1b134022;border-radius:32px;box-shadow:0 20px 50px #4a2fbd22}
+.card{background:#ffffffe6;backdrop-filter:blur(14px)}
+.chips li,.mc button{border:1.5px solid #1b134026;background:#ffffffcc}.mc button[aria-pressed=true]{background:var(--ink)}
+.glass{border-radius:30px;border:1.5px solid #fff;background:linear-gradient(135deg,#ffffffe0,#ffffff90);transition:transform .25s,box-shadow .25s}
+.glass:hover{transform:translateY(-5px) rotate(-.4deg);box-shadow:0 22px 50px #7c5cff30}
+.stage{border-radius:32px!important;box-shadow:inset 0 0 0 1.5px #ffffffb0,0 24px 60px #4a2fbd26!important}
+.m.b{background:linear-gradient(135deg,#f3efff,#ffeaf4);position:relative}
+.m.u{background:linear-gradient(135deg,#7c5cff,#ff5fa2)}
+.chat form{border-top:1.5px solid #1b134018}.chat input{border:1.5px solid #1b134026}
+.send{background:linear-gradient(135deg,#7c5cff,#ff5fa2)!important}
+footer{background:#1b1340}footer h4{color:var(--sun)}
+
+/* ===== Reações do Bup ===== */
+.rx{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.rx button{font:inherit;font-size:1.05rem;line-height:1;padding:5px 8px;border-radius:999px;border:1.5px solid #1b134018;background:#ffffffd9;cursor:pointer;transition:transform .15s,background .15s}
+.rx button:hover{transform:translateY(-3px) scale(1.18);background:#fff}
+.rx button.on{background:var(--sun);border-color:var(--ink)}
+.rxs{position:absolute;pointer-events:none;z-index:3;font-size:1.7rem;animation:rxup 1.6s ease-out forwards;filter:drop-shadow(0 4px 6px #0003)}
+@keyframes rxup{0%{opacity:0;transform:translate(0,0) scale(.3)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-150px) scale(1.2) rotate(var(--r))}}
+.pet.rxb{animation:rxb .5s ease}@keyframes rxb{30%{transform:scale(1.14) rotate(-5deg)}60%{transform:scale(.96) rotate(4deg)}}
+.pet .eyes-follow{transition:transform .12s}
+@media(prefers-reduced-motion:reduce){.rxs,.pet.rxb{animation-duration:.01s}}

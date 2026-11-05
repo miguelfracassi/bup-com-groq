@@ -102,7 +102,7 @@
 <div class="top"><h1 class="logo">Seu Bup</h1><div class="who"><span id="nm"></span><button class="btn" id="bt" type="button" hidden>Resgatar Beta</button><button class="btn ghost" id="cl" type="button">Limpar conversa</button><button class="btn ghost" id="lo" type="button">Sair</button></div></div>
 <div class="wrap" id="box" data-mood="feliz">
 <section class="stage">
-<p class="dica">Passe o dedo por cima dele e faça carinho. Cuidado pra ele não ficar bravo!</p>
+<p class="dica">Faça carinho, reaja às falas dele com emojis e veja ele mudar de cara!</p>
 <svg class="fl" style="--w:84px;left:7%;top:9%;--d:1.8;--t:.3s;--r:-12deg" viewBox="0 0 80 80"><rect x="6" y="6" width="68" height="68" rx="10" fill="#ffd23f" stroke="#e0a800" stroke-width="4"/><text x="40" y="58" font-size="46" font-weight="700" text-anchor="middle" fill="#fff" font-family="Silkscreen">?</text></svg>
 <svg class="fl" style="--w:54px;right:9%;top:8%;--d:2;--t:.5s;--r:25deg" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="10" fill="#fff" stroke="#ccc" stroke-width="2"/><g fill="#222"><circle cx="18" cy="18" r="4"/><circle cx="42" cy="42" r="4"/><circle cx="30" cy="30" r="4"/></g></svg>
 <svg class="fl" style="--w:72px;left:8%;bottom:20%;--d:2.4;--t:.7s" viewBox="0 0 80 60"><path d="M6 30l14-18-4 22 18-26-2 28 20-24-8 24 14-10" fill="none" stroke="#ff4fa3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -155,7 +155,16 @@ let mood='feliz',rest='feliz',hist=[],busy=false,hold,idle,cur,ty,anger=0;
 function show(m){mood=m;box.dataset.mood=m;pet.querySelectorAll('.x').forEach(g=>g.classList.toggle('on',g.classList.contains(m)));lab.textContent='Bup está '+NOME[m]}
 function set(m,ms){clearTimeout(hold);if(FIXO.includes(m))rest=m;show(m);if(!FIXO.includes(m))hold=setTimeout(()=>show(rest),ms||6000)}
 function add(role,txt){const e=document.createElement('div');e.className='m '+role;e.textContent=txt;log.append(e);while(log.children.length>40)log.firstChild.remove();log.scrollTop=log.scrollHeight;return e}
-function say(txt){if(cur)cur.el.textContent=cur.txt;clearInterval(ty);const el=add('b','');cur={el,txt};let i=0;ty=setInterval(()=>{el.textContent=txt.slice(0,++i);log.scrollTop=log.scrollHeight;if(i>=txt.length)clearInterval(ty)},22)}
+function say(txt){if(cur)cur.el.textContent=cur.txt;clearInterval(ty);const el=add('b','');cur={el,txt};let i=0;ty=setInterval(()=>{el.textContent=txt.slice(0,++i);log.scrollTop=log.scrollHeight;if(i>=txt.length){clearInterval(ty);rxBar(el,txt)}},22)}
+/* Reações: a pessoa reage à fala do Bup e ele responde com humor, emojis voando e uma frase (sem usar a API) */
+const RX={'❤️':{m:'amando',t:['Aaah, assim eu derreto!','Eu também te adoro!','Meu coraçãozinho foi a mil!']},'😂':{m:'rindo',t:['Hahaha, também achei!','Kkk, a gente se diverte, hein!','Rindo junto com você!']},'😮':{m:'surpreso',t:['Pois é, nem eu esperava!','Uau, né?!','Fiquei de queixo caído também!']},'😢':{m:'triste',t:['Ai, não fica assim... eu tô aqui.','Poxa... vem cá, um abraço virtual.','Tô sentindo junto com você.']},'👍':{m:'feliz',t:['Show! Combinado então!','Boa! Tamo junto!','Daquele jeito!']},'😡':{m:'bravo',t:['Ei! Não gostei dessa reação!','Hmpf! Tô de olho em você.']}};
+function rxBar(el,txt){if(locked||el.querySelector('.rx')||txt.length<3)return;const b=document.createElement('div');b.className='rx';
+Object.keys(RX).forEach(k=>{const x=document.createElement('button');x.type='button';x.textContent=k;x.setAttribute('aria-label','Reagir '+k);x.onclick=()=>{b.querySelectorAll('button').forEach(y=>y.classList.remove('on'));x.classList.add('on');react(k)};b.append(x)});el.append(b);log.scrollTop=log.scrollHeight}
+function burst(e,n){if(!stage)return;const r=pet.getBoundingClientRect(),sr=stage.getBoundingClientRect();for(let i=0;i<n;i++)setTimeout(()=>{const s=document.createElement('span');s.className='rxs';s.textContent=e;s.style.left=(r.left-sr.left+r.width*(.15+Math.random()*.7))+'px';s.style.top=(r.top-sr.top+r.height*.3)+'px';s.style.setProperty('--dx',(Math.random()*120-60)+'px');s.style.setProperty('--r',(Math.random()*60-30)+'deg');stage.append(s);setTimeout(()=>s.remove(),1700)},i*110)}
+function react(e){if(locked)return;const d=RX[e];if(!d)return;if(rest==='dormindo'){burst('💤',3);return}if(rest==='bravo'&&e!=='😡'){burst('💢',3);say('Hmpf. Ainda tô bravo, hein!');return}
+pet.classList.remove('rxb');void pet.offsetWidth;pet.classList.add('rxb');set(d.m,5000);burst(e,e==='❤️'?7:5);const t=Date.now();if(t-lastSay>1500){lastSay=t;const f=R(d.t);say(f);hist.push({role:'assistant',content:f,mood:d.m})}}
+/* Olhos do Bup acompanham o mouse/dedo */
+addEventListener('pointermove',ev=>{const r=pet.getBoundingClientRect(),dx=(ev.clientX-(r.left+r.width/2))/innerWidth,dy=(ev.clientY-(r.top+r.height/2))/innerHeight;pet.querySelectorAll('.x').forEach(g=>g.style.transform='translate('+(dx*10).toFixed(1)+'px,'+(dy*8).toFixed(1)+'px)')},{passive:true});
 
 /* Resposta local: usada sem chamar a API nos casos simples e quando a IA não está disponível */
 function local(msg){
