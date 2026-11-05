@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Dados · Ticord</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/site.css">
+<style>
+body{padding-top:0}[hidden]{display:none!important}
+.d{max-width:900px;margin:0 auto;padding:0 20px 140px}
+.d h1{font-size:clamp(1.8rem,5vw,2.8rem);margin:10px 0 4px}.lead{margin:0;color:#444}
+.bar{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:2px solid var(--ink);margin:0 -20px 26px;padding:10px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.gi{display:inline-flex;align-items:center;gap:10px;padding:10px 20px 10px 14px}.gi svg{width:22px;height:22px}
+.gi.on{background:#ff9fd2;color:var(--ink)}.gi.on svg{animation:bob var(--sp,2.4s) ease-in-out infinite}@keyframes bob{50%{transform:translateY(5px)}}
+.gi:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+.sp{flex:1;min-width:190px}.sp small{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:.8rem;margin-bottom:4px}
+.rl{height:10px;border:2px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}.rl i{display:block;height:100%;width:0;background:#ffb36b}
+.live{font-weight:700;font-size:.85rem;display:flex;gap:8px;align-items:center}.live:before{content:"";width:10px;height:10px;border-radius:50%;background:#2e9e4f;animation:pl 1.6s infinite}@keyframes pl{50%{opacity:.25}}
+.kp{display:flex;flex-wrap:wrap;gap:14px 44px;margin:28px 0 8px}.k b{display:block;font-size:2.3rem;line-height:1.05}.k span{font-size:.88rem;color:#555}
+.pn{padding:56px 0 40px;border-top:2px solid var(--ink);margin-top:30px}.pn h2{margin:0 0 8px;font-size:1.7rem}.pn h3{margin:26px 0 8px;font-size:1rem;color:#444}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:34px}@media(max-width:760px){.g2{grid-template-columns:1fr}}
+svg.ch{width:100%;height:auto;display:block}
+.hb{list-style:none;margin:0;padding:0;display:grid;gap:10px}.hb li{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:10px;align-items:center}
+.hb .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hb small{color:#666}
+.hb i{display:block;height:16px;border:2px solid var(--ink);border-radius:999px;background:linear-gradient(var(--c),var(--c)) 0/var(--w) 100% no-repeat,#fff}
+.em,.nt{color:#555;margin:6px 0}.nt{font-size:.92rem}
+.mtr{margin:14px 0}.mh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.92rem;margin-bottom:5px}
+.mt{height:20px;border:2px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}.mt i{display:block;height:100%;background:#8fb3ff;border-right:2px solid var(--ink)}
+.tl{display:flex;flex-wrap:wrap;gap:12px 34px}.tt{border-left:4px solid var(--ink);padding:1px 12px}.tt b{display:block;font-size:1.2rem}.tt span{font-size:.82rem;color:#555}
+.dw{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.dn{width:150px;height:150px}.lg{list-style:none;margin:0;padding:0;display:grid;gap:6px}.lg i{display:inline-block;width:14px;height:14px;border:2px solid var(--ink);border-radius:50%;margin-right:8px;vertical-align:-2px}
+.login{max-width:420px;margin:12vh auto 0}.login form{display:grid;gap:12px}.err{color:#c62828;font-weight:700;min-height:1.3em;margin:0}
+@media(prefers-reduced-motion:reduce){.live:before,.gi.on svg{animation:none}}
+</style></head><body><main class="d">
+<section class="card login" id="lg"><h1>Dados · Ticord</h1><p class="lead">Painel de entradas e servidor. Digite a chave de acesso.</p>
+<form id="lf"><input id="key" type="password" autocomplete="current-password" placeholder="Chave de acesso" required><p class="err" id="le" role="alert"></p><button class="btn" type="submit">Entrar</button></form></section>
+<div id="pn" hidden>
+<div class="bar"><button class="btn gi" id="gi" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15"/><path d="M5 12l7 7 7-7"/></svg><span id="gl">Começar a descer</span></button>
+<div class="sp"><small><span id="lv">Parado</span><span>começa bem lento e vai acelerando</span></small><div class="rl"><i id="lvb"></i></div></div>
+<div class="live" role="status" id="up">Carregando…</div><button class="btn alt" id="out" type="button">Sair</button></div>
+<h1>Dados</h1><p class="lead">Entradas, lugares, contas, armazenamento e rede, tudo numa página que se atualiza sozinha. <a href="/gestao">Gestão de contas</a></p>
+<div class="kp" id="kp"></div>
+<section class="pn" id="p0"></section><section class="pn" id="p1"></section><section class="pn" id="p2"></section><section class="pn" id="p3"></section><section class="pn" id="p4"></section><section class="pn" id="p5"></section>
+<p class="err" id="er" role="alert"></p>
+</div></main>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nf=n=>Number(n||0).toLocaleString('pt-BR');
+const by=b=>{b=+b||0;const u=['B','KB','MB','GB','TB'];let i=0;while(b>=1024&&i<4){b/=1024;i++}return b.toFixed(i?1:0).replace('.',',')+' '+u[i]};
+const COL=['#ff9fd2','#8fb3ff','#ffb36b','#a8e6b5','#ffe066','#c9a7ff'];
+let rn;try{rn=new Intl.DisplayNames(['pt-BR'],{type:'region'})}catch(e){}
+const cn=c=>{try{return rn&&rn.of(c)||c}catch(e){return c}};
+const fg=c=>/^[A-Z]{2}$/.test(c)?String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0))):'🌐';
+/* ---------- gráficos em SVG ---------- */
+const grid=(m,W,H,L,R,T,B)=>{let g='';for(let i=0;i<=3;i++){const q=m*i/3,y=T+(H-T-B)*(1-i/3);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#0003" stroke-dasharray="3 4"/><text x="${L-6}" y="${y+4}" text-anchor="end" font-size="11" fill="#555">${Math.round(q)}</text>`}return g};
+const area=(v,lb,col,unit)=>{const W=640,H=210,L=36,R=10,T=14,B=26,m=Math.max(1,...v),n=v.length,x=i=>L+i*(W-L-R)/Math.max(1,n-1),y=q=>T+(H-T-B)*(1-q/m),st=Math.ceil(n/6),pts=v.map((q,i)=>x(i)+','+y(q)).join(' ');
+return`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de linha">${grid(m,W,H,L,R,T,B)}<polygon points="${L},${y(0)} ${pts} ${x(n-1)},${y(0)}" fill="${col}" opacity=".5"/><polyline points="${pts}" fill="none" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>${v.map((q,i)=>`<circle cx="${x(i)}" cy="${y(q)}" r="3" fill="#161616"><title>${esc(lb[i])}: ${nf(q)}${unit||''}</title></circle>`).join('')}${lb.map((t,i)=>i%st===0?`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="#555">${esc(t)}</text>`:'').join('')}</svg>`};
+const bars=(v,lb,col)=>{const W=640,H=210,L=36,R=10,T=14,B=26,m=Math.max(1,...v),n=v.length,bw=(W-L-R)/n,st=Math.ceil(n/7);
+return`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de barras">${grid(m,W,H,L,R,T,B)}${v.map((q,i)=>{const h=(H-T-B)*q/m;return`<rect x="${L+i*bw+4}" y="${H-B-h}" width="${bw-8}" height="${h}" rx="4" fill="${col}" stroke="#161616" stroke-width="2"><title>${esc(lb[i])}: ${nf(q)}</title></rect>${i%st===0?`<text x="${L+i*bw+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="#555">${esc(lb[i])}</text>`:''}`}).join('')}</svg>`};
+const hb=(rows,fn,fmt)=>rows&&rows.length?`<ul class="hb">${rows.map((r,i)=>`<li><span class="nm">${fn(r)}</span><i style="--w:${Math.max(3,r.n/rows[0].n*100)}%;--c:${COL[i%6]}"></i><b>${(fmt||nf)(r.n)}</b></li>`).join('')}</ul>`:'<p class="em">Ainda sem dados. Eles aparecem assim que alguém abrir o site.</p>';
+const donut=(parts,tot)=>{const t=parts.reduce((a,p)=>a+p.n,0)||1,r=52,c=2*Math.PI*r;let o=0;return`<svg class="dn" viewBox="0 0 140 140" role="img" aria-label="Contas"><circle cx="70" cy="70" r="${r}" fill="none" stroke="#eee" stroke-width="22"/>${parts.map(p=>{const l=p.n/t*c,s=`<circle cx="70" cy="70" r="${r}" fill="none" stroke="${p.c}" stroke-width="22" stroke-dasharray="${l} ${c-l}" stroke-dashoffset="${-o}" transform="rotate(-90 70 70)"/>`;o+=l;return s}).join('')}<text x="70" y="77" text-anchor="middle" font-size="24" font-weight="700">${nf(tot)}</text></svg>`};
+const meter=(a,u,m)=>`<div class="mtr"><div class="mh"><span>${a}</span><b>${by(u)} de ${by(m)}</b></div><div class="mt"><i style="width:${Math.min(100,Math.max(u>0?2:0,u/(m||1)*100))}%"></i></div></div>`;
+const tile=(a,b)=>`<div class="tt"><b>${esc(b)}</b><span>${esc(a)}</span></div>`;
+/* ---------- séries ---------- */
+const H24=d=>{const now=Math.floor(Date.now()/36e5),m=new Map((d.hours||[]).map(r=>[Math.floor(new Date(r.h)/36e5),r.n])),v=[],lb=[];for(let i=23;i>=0;i--){const k=now-i;v.push(m.get(k)||0);lb.push(new Date(k*36e5).toLocaleTimeString('pt-BR',{hour:'2-digit'})+'h')}return[v,lb]};
+const D14=rows=>{const m=new Map((rows||[]).map(r=>[r.d,r.n])),v=[],lb=[];for(let i=13;i>=0;i--){const k=new Date(Date.now()-i*864e5).toLocaleDateString('sv-SE',{timeZone:'America/Sao_Paulo'});v.push(m.get(k)||0);lb.push(k.slice(8)+'/'+k.slice(5,7))}return[v,lb]};
+/* ---------- rede deste aparelho ---------- */
+let pg=[],last=null;
+const drawNet=()=>{const c=$('#pc');if(!c)return;const ok=pg.filter(x=>x>0),avg=ok.length?Math.round(ok.reduce((a,b)=>a+b,0)/ok.length):0;
+ c.innerHTML=pg.length>1?area(pg,pg.map((_,i)=>(pg.length-1-i)*5+'s'),COL[3],' ms'):'<p class="em">Medindo…</p>';
+ $('#ps').innerHTML=tile('Agora',(pg[pg.length-1]||0)+' ms')+tile('Média',avg+' ms')+tile('Menor',(ok.length?Math.min(...ok):0)+' ms')+tile('Maior',(ok.length?Math.max(...ok):0)+' ms')};
+const ping=async()=>{const t=performance.now();try{await fetch('/api/launch?_='+Date.now(),{cache:'no-store'});pg.push(Math.round(performance.now()-t))}catch(e){pg.push(0)}if(pg.length>30)pg.shift();drawNet()};
+const dev=async()=>{const e=$('#dv');if(!e)return;try{const s=await navigator.storage.estimate();e.innerHTML=meter('Espaço que o navegador usa neste aparelho',s.usage,s.quota)}catch(x){e.innerHTML='<p class="em">Este navegador não informa o armazenamento do aparelho.</p>'}};
+/* ---------- desenho dos painéis ---------- */
+const render=d=>{last=d;const t=d.tot||{},u=d.users||{},x=d.extra||{},ms=x.msgs||{},ds=d.disk||{},sv=d.srv||{},co=navigator.connection||{},ac=(u.total||0)-(u.banned||0);
+$('#kp').innerHTML=[['Entradas',t.total],['Visitantes únicos',t.uniq],['Últimas 24 h',t.d1],['Online agora',t.online],['Contas',u.total],['Banidas',u.banned]].map(([a,b])=>`<div class="k"><b>${nf(b)}</b><span>${a}</span></div>`).join('');
+const[hv,hl]=H24(d),[dv,dl]=D14(d.days),[sv2,sl]=D14(d.signups);
+$('#p0').innerHTML=`<h2>Entradas no site</h2><h3>Últimas 24 horas</h3>${area(hv,hl,COL[1],' entradas')}<h3>Últimos 14 dias</h3>${bars(dv,dl,COL[0])}`;
+$('#p1').innerHTML=`<h2>Países e estados que mais entraram</h2><div class="g2"><div><h3>Países</h3>${hb(d.countries,r=>fg(r.k)+' '+esc(cn(r.k)))}</div><div><h3>Estados</h3>${hb(d.regions,r=>esc(r.k)+' <small>'+esc(cn(r.c))+'</small>')}</div></div>`;
+$('#p2').innerHTML=`<h2>Cidades e páginas</h2><div class="g2"><div><h3>Cidades</h3>${hb(d.cities,r=>esc(r.k)+' <small>'+esc(r.c)+'</small>')}</div><div><h3>Páginas mais abertas</h3>${hb(d.pages,r=>esc(r.k))}</div></div>`;
+$('#p3').innerHTML=`<h2>Gestão</h2><div class="g2"><div><h3>Contas</h3><div class="dw">${donut([{n:ac,c:COL[3]},{n:u.banned||0,c:'#ff8a8a'}],u.total)}<ul class="lg"><li><i style="background:${COL[3]}"></i>Ativas: ${nf(ac)}</li><li><i style="background:#ff8a8a"></i>Banidas: ${nf(u.banned)}</li><li><i style="background:${COL[1]}"></i>Verificadas: ${nf(u.verified)}</li><li><i style="background:${COL[4]}"></i>Beta: ${nf(u.beta)}</li></ul></div>
+<div class="tl" style="margin-top:14px">${tile('Apelações pendentes',nf(x.appeals))}${tile('Lista de espera',nf(x.waitlist))}${tile('Mensagens (24 h)',nf(ms.d1))}${tile('Mensagens (total)',nf(ms.total))}</div></div><div><h3>Cadastros nos últimos 14 dias</h3>${bars(sv2,sl,COL[2])}</div></div>`;
+$('#p4').innerHTML=`<h2>SSD e memória</h2><p class="nt">O site roda na Vercel, que não tem disco próprio. O armazenamento do servidor é o banco Neon.</p>${meter('Banco de dados (Neon)',ds.db,ds.limit)}<h3>Maiores tabelas</h3>${hb((ds.tables||[]).map(r=>({k:r.k,n:r.s})),r=>esc(r.k),by)}<h3>Servidor</h3><div class="tl">${tile('Memória em uso',by(sv.rss))}${tile('Heap do Node',by(sv.heap))}${tile('Núcleos',sv.cpus||'n/d')}</div><h3>Este aparelho</h3><div id="dv"></div>`;
+$('#p5').innerHTML=`<h2>Rede</h2><h3>Tempo de resposta do site, medido aqui a cada 5 s</h3><div id="pc"></div><div class="tl" id="ps"></div><h3>Servidor e conexão</h3><div class="tl">${tile('Banco de dados',(sv.db_ms||0)+' ms')}${tile('Tipo de rede',co.effectiveType||'n/d')}${tile('Velocidade estimada',co.downlink?co.downlink+' Mb/s':'n/d')}${tile('Latência estimada',co.rtt?co.rtt+' ms':'n/d')}${tile('Economia de dados',co.saveData?'Ligada':'Desligada')}${tile('RAM do aparelho',navigator.deviceMemory?'≥ '+navigator.deviceMemory+' GB':'n/d')}${tile('Núcleos do aparelho',navigator.hardwareConcurrency||'n/d')}</div>`;
+dev();drawNet()};
+/* ---------- carregar e atualizar sozinho ---------- */
+let key='',left=15;try{key=sessionStorage.getItem('adm')||''}catch(e){}
+const bye=()=>{key='';try{sessionStorage.removeItem('adm')}catch(e){}$('#pn').hidden=true;$('#lg').hidden=false;$('#key').value='';stop()};
+const load=async()=>{left=15;const r=await fetch('/api/visit',{headers:{'x-admin-key':key},cache:'no-store'}),j=await r.json().catch(()=>({}));
+ if(!r.ok)throw Object.assign(new Error(j.error||'Erro'),{st:r.status});render(j);$('#er').textContent='';$('#lg').hidden=true;$('#pn').hidden=false};
+const tick=()=>{if(document.hidden)return;left--;$('#up').textContent='Atualiza sozinho em '+Math.max(left,0)+' s';if(left<=0)load().catch(e=>{e.st===401?bye():$('#er').textContent=e.message})};
+let ti=0,pi=0;const start=()=>{if(ti)return;ti=setInterval(tick,1000);pi=setInterval(ping,5000);ping()};
+$('#lf').onsubmit=async e=>{e.preventDefault();$('#le').textContent='';key=$('#key').value;try{await load();try{sessionStorage.setItem('adm',key)}catch(x){}start()}catch(x){$('#le').textContent=x.message}};
+$('#out').onclick=bye;
+if(key)load().then(start).catch(()=>bye());
+/* ---------- descer a página sozinho: começa bem lento e vai acelerando ---------- */
+const V0=5,VMAX=220,TAU=63; /* px/s: 5 no começo, chega a 220 em ~4 min */
+let run=false,raf=0,t0=0,pos=0,prev=0,wait=0;
+const lvl=v=>1+Math.round(9*Math.log(v/V0)/Math.log(VMAX/V0));
+function stop(){run=false;cancelAnimationFrame(raf);const g=$('#gi');g.classList.remove('on');g.setAttribute('aria-pressed','false');$('#gl').textContent='Começar a descer';$('#lv').textContent='Parado';$('#lvb').style.width='0'}
+const frame=ts=>{if(!run)return;const dt=Math.min(.1,(ts-prev)/1000);prev=ts;const max=document.documentElement.scrollHeight-innerHeight;
+ if(wait>0){wait-=dt;if(wait<=0){pos=0;scrollTo(0,0);t0=ts}}
+ else{const v=Math.min(VMAX,V0*Math.exp((ts-t0)/1000/TAU));pos+=v*dt;scrollTo(0,pos);
+  $('#lv').textContent='Velocidade '+lvl(v)+' de 10';$('#lvb').style.width=lvl(v)*10+'%';$('#gi').style.setProperty('--sp',Math.max(.5,2.4-v/100)+'s');
+  if(pos>=max-1)wait=3}
+ raf=requestAnimationFrame(frame)};
+$('#gi').onclick=()=>{if(run)return stop();run=true;pos=scrollY;t0=prev=performance.now();wait=0;const g=$('#gi');g.classList.add('on');g.setAttribute('aria-pressed','true');$('#gl').textContent='Parar de descer';raf=requestAnimationFrame(frame)};
+['wheel','touchstart','keydown','mousedown'].forEach(e=>addEventListener(e,ev=>{if(run&&!ev.target.closest('#gi'))stop()},{passive:true}));
+
+})();
+</script></body></html>
