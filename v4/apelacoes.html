@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Apelações · Ticord</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"><link rel="stylesheet" href="/site.css"><style>
+body{padding-top:0}.ad{max-width:1040px;margin:0 auto;padding:28px 20px 60px}
+.ad h1{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 6px}.ad .lead{margin:0 0 22px;font-size:1rem}.lead a{color:#1b5fd1}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.bar .btn,.fl2 .btn{padding:10px 18px;font-size:.9rem}
+.fl2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.fl2 .btn[aria-pressed=false]{background:#fff;color:var(--ink)}
+.tw{overflow-x:auto;background:#fff;border:2px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink)}
+table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:12px 16px;border-bottom:1px solid #e4e4ea;white-space:nowrap}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#555}tr:last-child td{border-bottom:0}
+.st{display:inline-block;font-weight:700;font-size:.8rem;border-radius:999px;padding:3px 12px;border:2px solid var(--ink);background:#ffe27a}.st.a{background:#c8f2cf}.st.d{background:#e4e4ea}
+.rs{display:inline-block;font-weight:700;font-size:.78rem;border-radius:999px;padding:2px 10px;background:#ffc9c9}
+.ac button{font:inherit;font-weight:700;font-size:.82rem;cursor:pointer;border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff}.ac button:focus-visible{outline:3px solid var(--b)}
+.empty{text-align:center;padding:30px;color:#666}.login{max-width:420px;margin:12vh auto 0}.login form{display:grid;gap:12px}
+.msg{font-weight:700;margin:12px 0 0;min-height:1.3em}.msg.ok{color:#1b7f3b}.msg.er{color:#c62828}
+dialog{border:2px solid var(--ink);border-radius:28px;padding:0;max-width:720px;width:calc(100% - 24px);max-height:92vh;box-shadow:8px 8px 0 var(--ink);font-family:inherit;overflow:hidden}dialog::backdrop{background:#0006}
+dialog[open]{display:flex;flex-direction:column}.dh{padding:20px 24px 12px;border-bottom:2px solid var(--ink)}.dh h2{margin:0;font-size:1.3rem}.db{padding:16px 24px;overflow:auto;flex:1}.df{padding:14px 24px;border-top:2px solid var(--ink);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.df .btn{padding:10px 18px;font-size:.9rem}.df .dg{background:#fff;color:#c62828;border-color:#c62828}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0 0 14px;font-size:.95rem}.kv dt{font-weight:700;color:#555}.kv dd{margin:0;overflow-wrap:anywhere}
+.bm{background:#fff0f0;border:2px solid #c62828;border-radius:16px;padding:10px 14px;margin:0 0 14px;overflow-wrap:anywhere}.bm b{color:#c62828}
+.db h3{margin:16px 0 8px;font-size:1rem}.chat2{display:flex;flex-direction:column;gap:8px;background:#f6f6f9;border-radius:18px;padding:12px;max-height:340px;overflow:auto}
+.c{max-width:84%;padding:8px 14px;border-radius:16px;line-height:1.4;overflow-wrap:anywhere;font-size:.95rem}.c.b{align-self:flex-start;background:#fff;border:1px solid #e0e0e6}.c.u{align-self:flex-end;background:var(--ink);color:#fff}.c small{display:block;opacity:.6;font-size:.72rem;margin-top:2px}
+.c.x{align-self:flex-end;background:#c62828;color:#fff;outline:3px solid #ffc9c9}
+</style></head><body><main class="ad">
+<section class="card login" id="lg"><h1>Apelações · Ticord</h1><p class="lead">Banimentos do Bup. Digite a chave de acesso.</p>
+<form id="lf"><input id="key" type="password" autocomplete="current-password" placeholder="Chave de acesso" required><p class="err" id="le" role="alert"></p><button class="btn" type="submit">Entrar</button></form></section>
+<section id="pn" hidden><h1>Apelações</h1><p class="lead">Quem foi banido e pediu revisão. Abra para ver o chat, depois desbana ou descarte. <a href="/gestao">← Voltar à Gestão</a></p>
+<div class="bar"><button class="btn alt" id="rf" type="button">Atualizar</button><button class="btn alt" id="out" type="button">Sair</button></div>
+<div class="fl2" role="group" aria-label="Filtro"><button class="btn" type="button" data-f="pending" aria-pressed="true"></button><button class="btn" type="button" data-f="all" aria-pressed="false"></button></div>
+<div class="tw"><table><thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Motivo</th><th>Status</th><th>Enviada</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="msg" id="ms" role="status"></p></section>
+</main>
+<dialog id="dg"><div class="dh"><h2 id="dt">Apelação</h2></div><div class="db" id="dbd"></div><div class="df" id="dfo"></div></dialog>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let key='',rows=[],flt='pending',cur=null;try{key=sessionStorage.getItem('adm')||''}catch(e){}
+const fmtD=t=>new Date(t).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+const RS={sexual:'Sexual / pornográfico',xingamento:'Xingamento',manual:'Banido pela equipe'},ST={pending:['Pendente',''],approved:['Desbanida','a'],discarded:['Descartada','d']};
+const api=(m,q,b)=>fetch('/api/admin-appeals'+(q||''),{method:m,headers:Object.assign({'x-admin-key':key},b?{'Content-Type':'application/json'}:{}),body:b?JSON.stringify(b):undefined}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Erro'),{st:r.status});return j});
+const say=(t,c)=>{const m=$('#ms');m.textContent=t;m.className='msg '+(c||'')};
+const draw=()=>{const np=rows.filter(r=>r.status==='pending').length;
+ document.querySelectorAll('[data-f]').forEach(b=>{b.textContent=b.dataset.f==='pending'?'Pendentes ('+np+')':'Todas ('+rows.length+')';b.setAttribute('aria-pressed',b.dataset.f===flt)});
+ const l=rows.filter(r=>flt==='all'||r.status==='pending');
+ $('#tb').innerHTML=l.length?l.map(r=>`<tr><td>${r.id}</td><td>${esc(r.name)}</td><td>${esc(r.phone)}</td><td>${esc(r.email)}</td><td><span class="rs">${esc(RS[r.ban_reason]||r.ban_reason||'—')}</span></td><td><span class="st ${ST[r.status][1]}">${ST[r.status][0]}</span></td><td>${esc(fmtD(r.created_at))}</td><td class="ac"><button type="button" data-id="${r.id}">Ver chat</button></td></tr>`).join(''):'<tr><td colspan="8" class="empty">Nenhuma apelação por aqui.</td></tr>'};
+const load=async()=>{const j=await api('GET');rows=j.rows;$('#lg').hidden=true;$('#pn').hidden=false;draw()};
+const bye=()=>{key='';try{sessionStorage.removeItem('adm')}catch(e){}$('#pn').hidden=true;$('#lg').hidden=false;$('#key').value=''};
+const fail=x=>x.st===401?bye():say(x.message,'er');
+$('#lf').onsubmit=async e=>{e.preventDefault();$('#le').textContent='';key=$('#key').value;try{await load();try{sessionStorage.setItem('adm',key)}catch(x){}}catch(x){$('#le').textContent=x.message}};
+$('#out').onclick=bye;$('#rf').onclick=()=>{say('');load().catch(fail)};
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{flt=b.dataset.f;draw()});
+$('#tb').onclick=async e=>{const b=e.target.closest('button[data-id]');if(!b)return;say('');
+ try{const j=await api('GET','?id='+b.dataset.id),a=j.appeal;cur=a;
+  $('#dt').textContent='Apelação #'+a.id+' · '+a.name;
+  $('#dbd').innerHTML=`<dl class="kv"><dt>Nome</dt><dd>${esc(a.name)}</dd><dt>Telefone</dt><dd><a href="tel:${esc(a.phone)}">${esc(a.phone)}</a></dd><dt>E-mail</dt><dd><a href="mailto:${esc(a.email)}">${esc(a.email)}</a></dd><dt>Conta</dt><dd>#${a.user_id} · ${esc(a.acc_name)} · ${esc(a.acc_email)}</dd><dt>Motivo</dt><dd>${esc(RS[a.ban_reason]||a.ban_reason||'—')}</dd><dt>Status</dt><dd>${ST[a.status][0]}${a.banned?'':' (conta ativa)'}</dd><dt>Enviada</dt><dd>${esc(fmtD(a.created_at))}</dd></dl>
+  ${a.ban_msg?`<div class="bm"><b>Mensagem que causou o banimento:</b><br>${esc(a.ban_msg)}</div>`:''}
+  <h3>Chat gravado (${j.messages.length} mensagens)</h3><div class="chat2" id="ch">${j.messages.map(m=>`<div class="c ${m.role==='user'?'u':'b'}">${esc(m.content)}<small>${m.role==='user'?'Pessoa':'Bup'} · ${esc(fmtD(m.created_at))}</small></div>`).join('')||'<p class="empty">Sem mensagens salvas.</p>'}${a.ban_msg?`<div class="c x">${esc(a.ban_msg)}<small>Mensagem apagada do chat · causou o banimento</small></div>`:''}</div>`;
+  $('#dfo').innerHTML=a.status==='pending'?'<button class="btn" type="button" id="bu">Desbanir</button><button class="btn dg" type="button" id="bd">Descartar apelação</button><button class="btn alt" type="button" id="bc">Fechar</button>':'<button class="btn alt" type="button" id="bc">Fechar</button>';
+  $('#bc').onclick=()=>$('#dg').close();
+  if($('#bu'))$('#bu').onclick=()=>decide('unban');if($('#bd'))$('#bd').onclick=()=>decide('discard');
+  $('#dg').showModal();const c=$('#ch');c.scrollTop=c.scrollHeight}catch(x){fail(x)}};
+const decide=async a=>{if(!confirm(a==='unban'?'Desbanir '+cur.acc_name+' ('+cur.acc_email+')? A pessoa volta a poder usar o chat.':'Descartar a apelação de '+cur.name+'? A conta continua banida.'))return;
+ try{await api('POST','',{action:a,id:cur.id});$('#dg').close();say(a==='unban'?'Conta desbanida.':'Apelação descartada.','ok');await load()}catch(x){$('#dg').close();fail(x)}};
+if(key)load().catch(bye);
+})();
+</script></body></html>
